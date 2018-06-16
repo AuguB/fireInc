@@ -1,4 +1,4 @@
-package fireinc.workers;
+package fireinc.workers.promotions;
 
 import fireinc.visitors.Visitor;
 

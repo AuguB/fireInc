@@ -3,13 +3,13 @@ package fireinc.visitors;
 import fireinc.enums.Owner;
 import fireinc.workers.Accountant;
 import fireinc.workers.Coder;
-import fireinc.workers.CompanyCar;
+import fireinc.workers.promotions.CompanyCar;
 import fireinc.workers.Designer;
 import fireinc.workers.Intern;
 import fireinc.workers.Manager;
-import fireinc.workers.OwnOffice;
-import fireinc.workers.Promotion;
-import fireinc.workers.Raise;
+import fireinc.workers.promotions.OwnOffice;
+import fireinc.workers.promotions.Promotion;
+import fireinc.workers.promotions.Raise;
 import fireinc.workers.Tester;
 import static java.lang.Math.random;
 

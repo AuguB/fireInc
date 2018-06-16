@@ -1,6 +1,7 @@
-package fireinc.workers;
+package fireinc.workers.promotions;
 
 import fireinc.visitors.Visitor;
+import fireinc.workers.Employee;
 
 public class Promotion<E> extends Employee {
 
