@@ -7,6 +7,10 @@ public class Manager extends Employee {
 
     private HiringStrategy hiring;
 
+    public Manager(String name, String ID) {
+        super(name, ID);
+    }
+
     public void run() {
     }
 
