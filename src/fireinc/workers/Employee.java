@@ -5,7 +5,7 @@ import java.lang.Runnable;
 import fireinc.visitors.Visitor;
 import static java.lang.Math.random;
 
-public class Employee implements Runnable {
+public class Employee<E> implements Runnable {
 
     private String name;
     private String ID;
@@ -34,8 +34,8 @@ public class Employee implements Runnable {
 
     }
 
-    public Visitor accept(Visitor v) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public E accept(Visitor v) {
+        return null;
     }
 
     public void run() {
