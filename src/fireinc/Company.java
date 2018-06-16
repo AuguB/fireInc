@@ -1,16 +1,16 @@
 package fireinc;
 
-
 import fireinc.NameGenerator.NameGenerator;
 import fireinc.enums.Gender;
 import fireinc.enums.Owner;
+import fireinc.strategies.CaterHireStrategy;
 import fireinc.strategies.FinanceHireStrategy;
 import fireinc.strategies.ProductionHireStrategy;
 import fireinc.workers.Manager;
 import java.util.ArrayList;
 
 public class Company {
-    
+
     private NameGenerator names;
 
     private ArrayList<Division> divisions;
@@ -34,8 +34,8 @@ public class Company {
         divisions.add(productionDivision());
         divisions.add(financeDivision());
     }
-    
-    public String getName(Gender gen){
+
+    public String getName(Gender gen) {
         return names.generateName(gen).toString();
     }
 
@@ -45,7 +45,7 @@ public class Company {
         div.setManager(man);
         return div;
     }
-    
+
     private Division financeDivision() {
         Division div = new Division("Finance", 10, 18);
         Manager man = new Manager("FINM2", new FinanceHireStrategy(), div);
@@ -53,7 +53,11 @@ public class Company {
         return div;
     }
 
-        
-    
-    
+    private Division caterDivision() {
+        Division div = new Division("Catering", 10, 18);
+        Manager man = new Manager("CATM2", new CaterHireStrategy(), div);
+        div.setManager(man);
+        return div;
+    }
+
 }
