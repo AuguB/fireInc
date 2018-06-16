@@ -9,12 +9,20 @@ public class ProductionHireStrategy implements HiringStrategy {
 
 
     public boolean isSkilledEnough(Employee emp) {
-        double skillSquare = emp.getSkill()*emp.getSkill();
-        double pu
+        double skillSquare = square(emp.getSkill());
+        double punctualitySquare = square(emp.getPunctuality());
+        double workethicsSquare = square(emp.getWorkethics());
+        double experienceSquare = square(emp.getExperience());
+        double socialSquare = square(emp.getSocial());
+        
+        double length = 
+        
     }
 
     @Override
     public Employee getEmployee(int ID) {
         
     }
+    
+    
 }

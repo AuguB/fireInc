@@ -17,4 +17,7 @@ public interface HiringStrategy {
     }
     public boolean isSkilledEnough(Employee emp);
     public Employee getEmployee(int ID);
+    public default double square(double doub){
+        return doub*doub;
+    }
 }
