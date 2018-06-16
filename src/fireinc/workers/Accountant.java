@@ -36,6 +36,21 @@ public class Accountant<E> extends Employee {
         result += 3 * random(); //mood factor
         result += skill;
         result += punctuality;
-
+        result += loyalty;
+        result -= Math.abs(0.5 - attitude);
+        result += experience;
+        if (experience < 1) {
+            experience += 0.0001;
+        }
+        if (skill < 1) {
+            skill += 0.001;
+        }
+        if (needsCoffee) {
+            result -= 0.6;
+        }
+        if (random() < 1 - skill/experience) {
+            mistakes += 1;
+        }
     }
 }
+

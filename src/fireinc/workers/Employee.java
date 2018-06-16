@@ -7,7 +7,7 @@ import static java.lang.Math.random;
 
 public class Employee<E> implements Runnable {
 
-    protected String name;
+    protected String name = "shitty";
     protected String ID;
     protected double skill;
     protected Gender gender;
