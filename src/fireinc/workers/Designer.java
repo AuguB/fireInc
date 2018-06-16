@@ -4,6 +4,10 @@ import fireinc.visitors.Visitor;
 
 public class Designer extends Employee {
 
+    public Designer(String name, String ID) {
+        super(name, ID);
+    }
+
     public void run() {
     }
 
