@@ -23,6 +23,7 @@ public class HarrassVisitor implements Visitor<Void> {
     @Override
     public Void visit(Accountant a) {
         a.setPunctuality(a.getPunctuality() - getRand());
+        a.setNeedsCoffee(true);
         return null;
     }
 

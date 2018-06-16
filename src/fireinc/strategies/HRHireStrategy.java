@@ -27,7 +27,9 @@ public class HRHireStrategy implements HiringStrategy {
 
     @Override
     public Employee getEmployee(int ID) {
-        return new Employee(DivID + ID);
+
+        return new Employee(DivID + "-" + ID);
+
     }
 
 }
