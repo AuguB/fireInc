@@ -30,9 +30,9 @@ public interface Visitor<E> {
     public E visit(OwnOffice o);
 
     public E visit(Manager m);
-    
+
     public E visit(Intern i);
-    
+
     public E visit(Promotion p);
 
     public default Owner getRandomOwner() {
