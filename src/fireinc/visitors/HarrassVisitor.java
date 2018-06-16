@@ -10,12 +10,20 @@ import fireinc.workers.promotions.OwnOffice;
 import fireinc.workers.promotions.Promotion;
 import fireinc.workers.promotions.Raise;
 import fireinc.workers.Tester;
+import java.util.Random;
 
 public class HarrassVisitor implements Visitor<Void> {
 
+    private Random random;
+
+    public HarrassVisitor() {
+        random = new Random();
+    }
+
     @Override
     public Void visit(Accountant a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        a.setPunctuality(a.getPunctuality() - getRand());
+        return null;
     }
 
     @Override
@@ -62,7 +70,9 @@ public class HarrassVisitor implements Visitor<Void> {
     public Void visit(Promotion p) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 
-   
+    private double getRand() {
+        return random.nextDouble() * (0.3 - 0.1) + 0.1;
+    }
+
 }
