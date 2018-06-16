@@ -1,7 +1,10 @@
 package fireinc;
 
 
+<<<<<<< HEAD
 import fireinc.NameGenerator.Name;
+=======
+>>>>>>> origin/master
 import fireinc.NameGenerator.NameGenerator;
 import fireinc.enums.Gender;
 import fireinc.enums.Owner;
@@ -30,7 +33,11 @@ public class Company {
     }
 
     private void setDivisions() {
-       // Manager productionManager = new Manager(1, new ProductionHire);
+        //Manager productionManager = new Manager(1, new ProductionHire);
+    }
+    
+    public String getName(Gender.MALE gen){
+        return names.generateName(gen);
     }
         
     
