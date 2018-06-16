@@ -23,6 +23,6 @@ public class ProductionHireStrategy implements HiringStrategy {
 
     @Override
     public Employee getEmployee(int ID) {
-        return null;
+        return new Employee(DivID + "-" + ID);
     }
 }
