@@ -19,7 +19,7 @@ public class Employee<E> implements Runnable {
     protected double workethics;
     protected double experience;
     protected double kitchening;
-    protected double workDone;
+    protected double workDone; 
     protected double attitude;
     protected int days;
     protected int mistakes;
