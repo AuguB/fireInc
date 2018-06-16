@@ -19,7 +19,10 @@ public class Employee<E> implements Runnable {
     private double workethics;
     private double experience;
     private double kitchening;
-    private boolean fired;
+    private double workDone;
+    private int days;
+    private int mistakes;
+    protected boolean fired;
     private boolean needsCoffee;
 
     public Employee(String ID) {
@@ -38,6 +41,7 @@ public class Employee<E> implements Runnable {
     }
 
     public void run() {
+        
     }
 
     private void makeRandomAttributes() {
