@@ -2,7 +2,7 @@ package fireinc.workers;
 
 import fireinc.visitors.Visitor;
 
-public class Promotion extends Employee {
+public class Promotion<E> extends Employee {
 
     private Employee employee;
 
@@ -10,7 +10,12 @@ public class Promotion extends Employee {
         super(ID);
     }
 
-    public Visitor accept(Visitor v) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public E accept(Visitor v) {
+        return (E) v.visit(this);
+    }
+    @Override
+    public void run(){
+        Thread thread = new Thread(employee);
+        thread.start();
     }
 }

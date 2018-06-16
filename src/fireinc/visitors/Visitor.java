@@ -5,8 +5,10 @@ import fireinc.workers.Accountant;
 import fireinc.workers.Coder;
 import fireinc.workers.CompanyCar;
 import fireinc.workers.Designer;
+import fireinc.workers.Intern;
 import fireinc.workers.Manager;
 import fireinc.workers.OwnOffice;
+import fireinc.workers.Promotion;
 import fireinc.workers.Raise;
 import fireinc.workers.Tester;
 import static java.lang.Math.random;
@@ -28,6 +30,10 @@ public interface Visitor<E> {
     public E visit(OwnOffice o);
 
     public E visit(Manager m);
+    
+    public E visit(Intern i);
+    
+    public E visit(Promotion p);
 
     public default Owner getRandomOwner() {
         double select = random();

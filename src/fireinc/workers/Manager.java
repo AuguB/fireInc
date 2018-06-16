@@ -3,7 +3,7 @@ package fireinc.workers;
 import fireinc.strategies.HiringStrategy;
 import fireinc.visitors.Visitor;
 
-public class Manager extends Employee {
+public class Manager<E> extends Employee {
 
     private HiringStrategy hiring;
 
@@ -14,8 +14,8 @@ public class Manager extends Employee {
     public void run() {
     }
 
-    public Visitor accept(Visitor v) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public E accept(Visitor v) {
+        return (E) v.visit(this);
     }
 
     public void work() {
