@@ -1,6 +1,7 @@
 package fireinc.workers;
 
 import fireinc.visitors.Visitor;
+import static java.lang.Math.random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,6 +14,7 @@ public class Accountant<E> extends Employee {
     @Override
     public void run() {
         while (!fired) {
+            days++;
             try {
                 work();
                 Thread.sleep(300); //lunchbreak
@@ -30,6 +32,10 @@ public class Accountant<E> extends Employee {
     }
 
     public void work() {
+        double result = 0;
+        result += 3 * random(); //mood factor
+        result += skill;
+        result += punctuality;
 
     }
 }

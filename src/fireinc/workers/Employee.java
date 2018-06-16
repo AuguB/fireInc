@@ -7,23 +7,24 @@ import static java.lang.Math.random;
 
 public class Employee<E> implements Runnable {
 
-    private String name;
-    private String ID;
-    private double skill;
-    private Gender gender;
-    private double punctuality;
-    private double cleanliness;
-    private double social;
-    private double loyalty;
-    private double looks;
-    private double workethics;
-    private double experience;
-    private double kitchening;
-    private double workDone;
-    private int days;
-    private int mistakes;
+    protected String name;
+    protected String ID;
+    protected double skill;
+    protected Gender gender;
+    protected double punctuality;
+    protected double cleanliness;
+    protected double social;
+    protected double loyalty;
+    protected double looks;
+    protected double workethics;
+    protected double experience;
+    protected double kitchening;
+    protected double workDone;
+    protected double attitude;
+    protected int days;
+    protected int mistakes;
     protected boolean fired;
-    private boolean needsCoffee;
+    protected boolean needsCoffee;
 
     public Employee(String ID) {
         this.name = name;
@@ -33,6 +34,7 @@ public class Employee<E> implements Runnable {
         }
         fired = false;
         needsCoffee = false;
+        attitude = .4;
         makeRandomAttributes();
     }
 
@@ -41,7 +43,17 @@ public class Employee<E> implements Runnable {
     }
 
     public void run() {
-        
+
+    }
+
+    public double results() {
+        return workDone / days;
+    }
+
+    public void decreaseFear() {
+        if (attitude > 0) {
+            attitude -= 0.0001;
+        }
     }
 
     private void makeRandomAttributes() {
