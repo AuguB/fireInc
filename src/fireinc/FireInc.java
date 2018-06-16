@@ -5,7 +5,6 @@
  */
 package fireinc;
 
-import fireinc.NameGenerator.Name;
 import fireinc.NameGenerator.NameGenerator;
 import fireinc.enums.Gender;
 
@@ -21,6 +20,7 @@ public class FireInc {
     public static void main(String[] args) {
         NameGenerator generator = new NameGenerator();
         System.out.println(generator.generateName(Gender.FEMALE));
+        System.out.println(generator.generateName(Gender.MALE));
     }
 
 }

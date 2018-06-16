@@ -27,7 +27,7 @@ public class HRHireStrategy implements HiringStrategy {
 
     @Override
     public Employee getEmployee(int ID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new Employee(DivID + ID);
     }
 
 }

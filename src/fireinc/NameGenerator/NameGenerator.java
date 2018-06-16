@@ -43,21 +43,21 @@ public class NameGenerator
 
   private static final String SURNAMES_FILE = "/fireinc/NameGenerator/resources/dist.all.last.txt";
 
-  private final Random random = new Random();
+  private static final Random random = new Random();
 
-  private final NameGeneratorOptions options;
+  private static NameGeneratorOptions options;
 
-  private TreeMap<Float, String> surnames;
+  private static TreeMap<Float, String> surnames;
 
-  private TreeMap<Float, String> females;
+  private static TreeMap<Float, String> females;
 
-  private TreeMap<Float, String> males;
+  private static TreeMap<Float, String> males;
 
   public NameGenerator() {
     this(new NameGeneratorOptions());
   }
 
-  public NameGenerator(NameGeneratorOptions options) {
+  public  NameGenerator(NameGeneratorOptions options) {
     this.options = options;
     try {
       surnames = loadNames(SURNAMES_FILE);
@@ -74,7 +74,7 @@ public class NameGenerator
    *
    * @return a randomly generated name.
    */
-  public Name generateName() {
+  public static Name generateName() {
     return generateName(null);
   }
 
@@ -84,7 +84,7 @@ public class NameGenerator
    * @param gender the gender of the name to generate
    * @return a randomly generated name
    */
-  public Name generateName(Gender gender) {
+  public static Name generateName(Gender gender) {
     if (gender == null) {
       gender = (random.nextFloat() * 100) <= options.getGenderWeight() ? Gender.FEMALE : Gender.MALE;
     }
@@ -127,7 +127,7 @@ public class NameGenerator
    *
    * @return the picked name.
    */
-  private String pickName(final TreeMap<Float, String> map) {
+  private static String pickName(final TreeMap<Float, String> map) {
     assert !map.isEmpty();
 
     Float key = null;
