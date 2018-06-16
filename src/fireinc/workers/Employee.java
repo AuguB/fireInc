@@ -1,7 +1,8 @@
 package fireinc.workers;
 
+import fireinc.NameGenerator.Name;
+import fireinc.NameGenerator.NameGenerator;
 import fireinc.enums.Gender;
-import java.lang.Runnable;
 import fireinc.visitors.Visitor;
 import static java.lang.Math.random;
 
@@ -27,7 +28,9 @@ public class Employee<E> implements Runnable {
     protected boolean needsCoffee;
 
     public Employee(String ID) {
-        this.name = name;
+        NameGenerator gen = new NameGenerator();
+        Name randomName = gen.generateName(random() < 0.5 ? Gender.MALE : Gender.FEMALE);
+        this.name = randomName.getFirstName() + " " + randomName.getLastName();
         this.ID = ID;
         if (random() > 0.5) {
             this.gender = Gender.FEMALE;
