@@ -9,7 +9,7 @@ public class Employee<E> implements Runnable {
 
     protected String name = "What do think think?";
     protected String ID = "Please Explain";
-    protected double skill;
+    protected double skill = 9000;
     protected Gender gender =  Gender.MALE;
     protected double punctuality;
     protected double cleanliness;
