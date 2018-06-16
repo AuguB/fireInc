@@ -1,21 +1,20 @@
 package fireinc.strategies;
 
-import fireinc.workers.Coder;
 import fireinc.workers.Employee;
 
 public interface HiringStrategy {
     
-    public default Employee hire(int ID){
+    public default Employee hire(int ID, double managerThreshold){
         boolean hired = false;
-        Employee current = getEmployee(ID);
+        Employee current = null;
         while(!hired){
-            current = new Coder("P1");
-            if(isSkilledEnough(current))
+            current = getEmployee(ID);
+            if(isSkilledEnough(current, managerThreshold))
                 hired = true;
         }
         return current;
     }
-    public boolean isSkilledEnough(Employee emp);
+    public boolean isSkilledEnough(Employee emp, double managerThreshold);
     public Employee getEmployee(int ID);
     public default double square(double doub){
         return doub*doub;

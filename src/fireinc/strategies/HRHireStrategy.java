@@ -1,13 +1,28 @@
 package fireinc.strategies;
 
+import fireinc.enums.Gender;
 import fireinc.workers.Employee;
+import static java.lang.Math.random;
 
 public class HRHireStrategy implements HiringStrategy {
-        private String DivID = "HR";
+
+    private String DivID = "HR";
+    private int nrOfQualities = 6;
 
     @Override
-    public boolean isSkilledEnough(Employee emp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean isSkilledEnough(Employee emp, double managerThreshold) {
+        double sum = (random() - 0.5);
+        sum += square(emp.getSocial());
+        sum += square(emp.getLooks());
+        sum += square(emp.getLoyalty());
+        sum += square(emp.getExperience());
+        sum += square(emp.getKitchening());
+        sum += square(emp.getCleanliness());
+        if (emp.getGender() == Gender.FEMALE) {
+            sum += 0.8;
+        }
+        double length = Math.sqrt(sum);
+        return (length > (managerThreshold * Math.sqrt(nrOfQualities)));
     }
 
     @Override
