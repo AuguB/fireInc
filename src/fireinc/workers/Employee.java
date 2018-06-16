@@ -45,15 +45,15 @@ public class Employee<E> implements Runnable {
     }
 
     private void makeRandomAttributes() {
-        this.cleanliness = random();
+        this.setCleanliness(random());
         this.experience = random();
         this.kitchening = random();
         this.looks = random();
-        this.loyalty = random();
-        this.punctuality = random();
-        this.skill = random();
-        this.social = random();
-        this.workethics = random();
+        this.setLoyalty(random());
+        this.setPunctuality(random());
+        this.setSkill(random());
+        this.setSocial(random());
+        this.setWorkethics(random());
     }
 
     public String getName() {
@@ -110,6 +110,69 @@ public class Employee<E> implements Runnable {
 
     public boolean isNeedsCoffee() {
         return needsCoffee;
+    }
+
+    /**
+     * @param skill the skill to set
+     */
+    public void setSkill(double skill) {
+        this.skill = skill;
+    }
+
+    /**
+     * @param punctuality the punctuality to set
+     */
+    public void setPunctuality(double punctuality) {
+        this.punctuality = punctuality;
+    }
+
+    /**
+     * @param cleanliness the cleanliness to set
+     */
+    public void setCleanliness(double cleanliness) {
+        this.cleanliness = cleanliness;
+    }
+
+    /**
+     * @param social the social to set
+     */
+    public void setSocial(double social) {
+        this.social = social;
+    }
+
+    /**
+     * @param loyalty the loyalty to set
+     */
+    public void setLoyalty(double loyalty) {
+        this.loyalty = loyalty;
+    }
+
+    /**
+     * @param workethics the workethics to set
+     */
+    public void setWorkethics(double workethics) {
+        this.workethics = workethics;
+    }
+
+    /**
+     * @param workDone the workDone to set
+     */
+    public void setWorkDone(double workDone) {
+        this.workDone = workDone;
+    }
+
+    /**
+     * @param mistakes the mistakes to set
+     */
+    public void setMistakes(int mistakes) {
+        this.mistakes = mistakes;
+    }
+
+    /**
+     * @param needsCoffee the needsCoffee to set
+     */
+    public void setNeedsCoffee(boolean needsCoffee) {
+        this.needsCoffee = needsCoffee;
     }
 
 }
