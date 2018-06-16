@@ -6,8 +6,8 @@ import static java.lang.Math.random;
 
 public class HRHireStrategy implements HiringStrategy {
 
-    private String DivID = "HR";
-    private int nrOfQualities = 6;
+    private final String DivID = "HR";
+    private final int nrOfQualities = 6;
 
     @Override
     public boolean isSkilledEnough(Employee emp, double managerThreshold) {

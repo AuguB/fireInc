@@ -6,9 +6,10 @@ import static java.lang.Math.random;
 
 public class ProductionHireStrategy implements HiringStrategy {
 
-    private String DivID = "PRO";
-    private int nrOfQualities = 5;
+    private final String DivID = "PRO";
+    private final int nrOfQualities = 5;
 
+    @Override
     public boolean isSkilledEnough(Employee emp, double managerThreshold) {
         double sum = (random() - 0.5);
         sum += square(emp.getSkill());
