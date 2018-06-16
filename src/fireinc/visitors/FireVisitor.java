@@ -5,6 +5,7 @@ import fireinc.workers.Coder;
 import fireinc.workers.CompanyCar;
 import fireinc.workers.Designer;
 import fireinc.workers.Employee;
+import fireinc.workers.Intern;
 import fireinc.workers.Manager;
 import fireinc.workers.OwnOffice;
 import fireinc.workers.Promotion;
@@ -61,6 +62,18 @@ public class FireVisitor implements Visitor<Void> {
         return null;
     }
 
+    @Override
+    public Void visit(Intern i) {
+        fire(i);
+        return null;
+    }
+
+    @Override
+    public Void visit(Promotion p) {
+        fire(p);
+        return null;
+    }
+    
     private void fire(Employee e) {
         e.YouAreFired();
         System.out.println(this.getRandomOwner() + " has fired " + e.getName());
