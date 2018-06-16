@@ -36,7 +36,7 @@ public class Company {
         //Manager productionManager = new Manager(1, new ProductionHire);
     }
     
-    public String getName(Gender.MALE gen){
+    public Name getName(Gender gen){
         return names.generateName(gen);
     }
         
