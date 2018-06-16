@@ -6,8 +6,8 @@ public class CompanyCar extends Promotion {
 
     private double horsePower;
 
-    public CompanyCar(String name, String ID) {
-        super(name, ID);
+    public CompanyCar(String ID) {
+        super( ID);
     }
 
     public Visitor accept(Visitor v) {

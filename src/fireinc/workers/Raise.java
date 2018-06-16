@@ -6,8 +6,8 @@ public class Raise extends Promotion {
 
     private double value;
 
-    public Raise(String name, String ID) {
-        super(name, ID);
+    public Raise(String ID) {
+        super( ID);
     }
 
     public Visitor accept(Visitor v) {

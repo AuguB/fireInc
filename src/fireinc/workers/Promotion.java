@@ -6,8 +6,8 @@ public class Promotion extends Employee {
 
     private Employee employee;
 
-    public Promotion(String name, String ID) {
-        super(name, ID);
+    public Promotion( String ID) {
+        super(ID);
     }
 
     public Visitor accept(Visitor v) {

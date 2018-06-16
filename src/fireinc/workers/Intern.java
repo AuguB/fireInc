@@ -5,7 +5,7 @@ import fireinc.visitors.Visitor;
 public class Intern extends Employee {
 
     public Intern(String name, String ID) {
-        super(name, ID);
+        super(ID);
     }
 
     public void run() {

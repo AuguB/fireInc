@@ -10,8 +10,8 @@ public class OwnOffice extends Promotion {
 
     private boolean airco;
 
-    public OwnOffice(String name, String ID) {
-        super(name, ID);
+    public OwnOffice(String ID) {
+        super( ID);
     }
 
     public Visitor accept(Visitor v) {

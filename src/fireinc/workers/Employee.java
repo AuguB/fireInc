@@ -22,7 +22,7 @@ public class Employee<E> implements Runnable {
     private boolean fired;
     private boolean needsCoffee;
 
-    public Employee(String name, String ID) {
+    public Employee(String ID) {
         this.name = name;
         this.ID = ID;
         if (random() > 0.5) {
@@ -31,7 +31,6 @@ public class Employee<E> implements Runnable {
         fired = false;
         needsCoffee = false;
         makeRandomAttributes();
-
     }
 
     public E accept(Visitor v) {

@@ -4,8 +4,8 @@ import fireinc.visitors.Visitor;
 
 public class Coder extends Employee {
 
-    public Coder(String name, String ID) {
-        super(name, ID);
+    public Coder(String ID) {
+        super(ID);
     }
 
     public void run() {

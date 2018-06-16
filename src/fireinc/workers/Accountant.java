@@ -4,8 +4,8 @@ import fireinc.visitors.Visitor;
 
 public class Accountant<E> extends Employee {
 
-    public Accountant(String name, String ID) {
-        super(name, ID);
+    public Accountant( String ID) {
+        super( ID);
     }
 
     public void run() {
