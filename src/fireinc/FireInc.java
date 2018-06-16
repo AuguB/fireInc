@@ -5,6 +5,10 @@
  */
 package fireinc;
 
+import fireinc.NameGenerator.Name;
+import fireinc.NameGenerator.NameGenerator;
+import fireinc.enums.Gender;
+
 /**
  *
  * @author guus
@@ -15,7 +19,8 @@ public class FireInc {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Company fireInc = new Company();
+        NameGenerator generator = new NameGenerator();
+        System.out.println(generator.generateName(Gender.FEMALE));
     }
 
 }

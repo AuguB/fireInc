@@ -7,8 +7,8 @@ import static java.lang.Math.random;
 
 public class Employee<E> implements Runnable {
 
-    protected String name = "What do think think?";
-    protected String ID = "Please Explain";
+    protected String name;
+    protected String ID;
     protected double skill;
     protected Gender gender;
     protected double punctuality;
@@ -19,7 +19,7 @@ public class Employee<E> implements Runnable {
     protected double workethics;
     protected double experience;
     protected double kitchening;
-    protected double workDone;
+    protected double workDone; 
     protected double attitude;
     protected int days;
     protected int mistakes;
@@ -120,6 +120,10 @@ public class Employee<E> implements Runnable {
         return fired;
     }
 
+    public void YouAreFired() {
+        fired = true;
+    }
+    
     public boolean isNeedsCoffee() {
         return needsCoffee;
     }
