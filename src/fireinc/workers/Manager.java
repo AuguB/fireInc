@@ -12,18 +12,6 @@ public class Manager<E> extends Employee {
     }
 
     public void run() {
-        while (!fired) {
-            try {
-                work();
-                Thread.sleep(100); //lunchbreak
-                work();
-                Thread.sleep(100); //lunchbreak
-                work();
-                Thread.sleep(2000); //sleep
-            } catch (InterruptedException ex) {
-
-            }
-        }
     }
 
     public E accept(Visitor v) {
@@ -31,6 +19,5 @@ public class Manager<E> extends Employee {
     }
 
     public void work() {
-        double result = 0;
     }
 }
