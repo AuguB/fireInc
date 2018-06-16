@@ -5,6 +5,7 @@ import fireinc.enums.Gender;
 import fireinc.enums.Owner;
 import fireinc.strategies.CaterHireStrategy;
 import fireinc.strategies.FinanceHireStrategy;
+import fireinc.strategies.HRHireStrategy;
 import fireinc.strategies.ProductionHireStrategy;
 import fireinc.workers.Manager;
 import java.util.ArrayList;
@@ -33,6 +34,8 @@ public class Company {
     private void setDivisions() {
         divisions.add(productionDivision());
         divisions.add(financeDivision());
+        divisions.add(caterDivision());
+        divisions.add(HRDivision());
     }
 
     public String getName(Gender gen) {
@@ -48,14 +51,21 @@ public class Company {
 
     private Division financeDivision() {
         Division div = new Division("Finance", 10, 18);
-        Manager man = new Manager("FINM2", new FinanceHireStrategy(), div);
+        Manager man = new Manager("FINM1", new FinanceHireStrategy(), div);
         div.setManager(man);
         return div;
     }
 
     private Division caterDivision() {
-        Division div = new Division("Catering", 10, 18);
-        Manager man = new Manager("CATM2", new CaterHireStrategy(), div);
+        Division div = new Division("Catering", 20, 25);
+        Manager man = new Manager("CATM1", new CaterHireStrategy(), div);
+        div.setManager(man);
+        return div;
+    }
+    
+    private Division HRDivision() {
+        Division div = new Division("Human Resources", 10, 15);
+        Manager man = new Manager("HRM1", new HRHireStrategy(), div);
         div.setManager(man);
         return div;
     }
