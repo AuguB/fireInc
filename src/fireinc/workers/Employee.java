@@ -7,10 +7,10 @@ import static java.lang.Math.random;
 
 public class Employee<E> implements Runnable {
 
-    protected String name = "What do think think?";
-    protected String ID = "Please Explain";
-    protected double skill = 9000;
-    protected Gender gender =  Gender.MALE;
+    protected String name;
+    protected String ID;
+    protected double skill;
+    protected Gender gender;
     protected double punctuality;
     protected double cleanliness;
     protected double social;
