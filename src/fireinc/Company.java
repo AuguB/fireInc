@@ -4,6 +4,7 @@ package fireinc;
 import fireinc.NameGenerator.NameGenerator;
 import fireinc.enums.Gender;
 import fireinc.enums.Owner;
+import fireinc.strategies.ProductionHireStrategy;
 import fireinc.workers.Manager;
 import java.util.ArrayList;
 
@@ -29,11 +30,16 @@ public class Company {
     }
 
     private void setDivisions() {
-        Manager productionManager = new Manager(1, new ProductionHire);
+        divisions.add(productionDivision());
     }
     
-    public String getName(Gender.MALE gen){
-        return names.generateName(gen);
+    public String getName(Gender gen){
+        return names.generateName(gen).toString();
+    }
+
+    private Division productionDivision() {
+        Division production = new Division("Production", 50, 60);
+        Manager productionManager = new Manager("1", new ProductionHireStrategy(), production);
     }
         
     
