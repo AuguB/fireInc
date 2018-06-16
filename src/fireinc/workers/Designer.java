@@ -2,13 +2,14 @@ package fireinc.workers;
 
 import fireinc.visitors.Visitor;
 
-public class Designer extends Employee {
+public class Designer<E> extends Employee {
 
     public Designer( String ID) {
         super(ID);
     }
 
     public void run() {
+        
     }
 
     public Visitor accept(Visitor v) {

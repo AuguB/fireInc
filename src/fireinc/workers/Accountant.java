@@ -18,4 +18,8 @@ public class Accountant<E> extends Employee {
 
     public void work() {
     }
+
+    public void YouAreFired() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

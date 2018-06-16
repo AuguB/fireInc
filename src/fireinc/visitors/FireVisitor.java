@@ -4,52 +4,64 @@ import fireinc.workers.Accountant;
 import fireinc.workers.Coder;
 import fireinc.workers.CompanyCar;
 import fireinc.workers.Designer;
+import fireinc.workers.Employee;
 import fireinc.workers.Manager;
 import fireinc.workers.OwnOffice;
 import fireinc.workers.Raise;
 import fireinc.workers.Tester;
 
-public class FireVisitor implements Visitor<Boolean> {
+public class FireVisitor implements Visitor<Void> {
 
     @Override
-    public Boolean visit(Accountant a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Void visit(Accountant a) {
+        fire(a);
+        return null;
     }
 
     @Override
-    public Boolean visit(Coder c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Void visit(Coder c) {
+        fire(c);
+        return null;
     }
 
     @Override
-    public Boolean visit(Tester t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Void visit(Tester t) {
+        fire(t);
+        return null;
     }
 
     @Override
-    public Boolean visit(Designer d) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Void visit(Designer d) {
+        fire(d);
+        return null;
     }
 
     @Override
-    public Boolean visit(Raise r) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Void visit(Raise r) {
+        fire(r);
+        return null;
     }
 
     @Override
-    public Boolean visit(CompanyCar c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Void visit(CompanyCar c) {
+        fire(c);
+        return null;
     }
 
     @Override
-    public Boolean visit(OwnOffice o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Void visit(OwnOffice o) {
+        fire(o);
+        return null;
     }
 
     @Override
-    public Boolean visit(Manager m) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Void visit(Manager m) {
+        fire(m);
+        return null;
     }
 
-    
+    private void fire(Employee e) {
+        e.YouAreFired();
+        System.out.println(this.getRandomOwner() + " has fired " + e.getName());
+    }
 }
