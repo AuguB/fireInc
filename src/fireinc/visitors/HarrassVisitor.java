@@ -9,45 +9,48 @@ import fireinc.workers.OwnOffice;
 import fireinc.workers.Raise;
 import fireinc.workers.Tester;
 
-public class HarrassVisitor implements Visitor {
+public class HarrassVisitor implements Visitor<Void> {
 
     @Override
-    public Accountant visit(Accountant a) {
+    public Void visit(Accountant a) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Coder visit(Coder c) {
+    public Void visit(Coder c) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Tester visit(Tester t) {
+    public Void visit(Tester t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Designer visit(Designer d) {
+    public Void visit(Designer d) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Raise visit(Raise r) {
+    public Void visit(Raise r) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public CompanyCar visit(CompanyCar c) {
+    public Void visit(CompanyCar c) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public OwnOffice visit(OwnOffice o) {
+    public Void visit(OwnOffice o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Manager visit(Manager m) {
+    public Void visit(Manager m) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+
+   
 }

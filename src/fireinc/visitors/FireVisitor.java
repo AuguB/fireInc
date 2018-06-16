@@ -9,45 +9,47 @@ import fireinc.workers.OwnOffice;
 import fireinc.workers.Raise;
 import fireinc.workers.Tester;
 
-public class FireVisitor implements Visitor {
+public class FireVisitor implements Visitor<Boolean> {
 
     @Override
-    public Accountant visit(Accountant a) {
+    public Boolean visit(Accountant a) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Coder visit(Coder c) {
+    public Boolean visit(Coder c) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Tester visit(Tester t) {
+    public Boolean visit(Tester t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Designer visit(Designer d) {
+    public Boolean visit(Designer d) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Raise visit(Raise r) {
+    public Boolean visit(Raise r) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public CompanyCar visit(CompanyCar c) {
+    public Boolean visit(CompanyCar c) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public OwnOffice visit(OwnOffice o) {
+    public Boolean visit(OwnOffice o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Manager visit(Manager m) {
+    public Boolean visit(Manager m) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
 }

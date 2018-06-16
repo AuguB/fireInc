@@ -9,21 +9,21 @@ import fireinc.workers.OwnOffice;
 import fireinc.workers.Raise;
 import fireinc.workers.Tester;
 
-public interface Visitor {
+public interface Visitor<E> {
 
-    public Accountant visit(Accountant a);
+    public E visit(Accountant a);
 
-    public Coder visit(Coder c);
+    public E visit(Coder c);
 
-    public Tester visit(Tester t);
+    public E  visit(Tester t);
 
-    public Designer visit(Designer d);
+    public E visit(Designer d);
 
-    public Raise visit(Raise r);
+    public E visit(Raise r);
 
-    public CompanyCar visit(CompanyCar c);
+    public E visit(CompanyCar c);
 
-    public OwnOffice visit(OwnOffice o);
+    public E visit(OwnOffice o);
 
-    public Manager visit(Manager m);
+    public E visit(Manager m);
 }

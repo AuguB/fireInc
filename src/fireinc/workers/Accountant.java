@@ -8,10 +8,6 @@ public class Accountant<E> extends Employee {
         super(name, ID);
     }
 
-    public Accountant(String name, String ID) {
-        super(name, ID);
-    }
-
     public void run() {
     }
 

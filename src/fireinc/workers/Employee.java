@@ -34,18 +34,6 @@ public class Employee<E> implements Runnable {
 
     }
 
-    public Employee(String name, String ID) {
-        this.name = name;
-        this.ID = ID;
-        if (random() > 0.5) {
-            this.gender = Gender.FEMALE;
-        }
-        fired = false;
-        needsCoffee = false;
-        makeRandomAttributes();
-
-    }
-
     public E accept(Visitor v) {
         return null;
     }
