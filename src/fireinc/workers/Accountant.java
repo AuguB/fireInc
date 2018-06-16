@@ -52,5 +52,9 @@ public class Accountant<E> extends Employee {
             mistakes += 1;
         }
     }
+
+    public void YouAreFired() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
 

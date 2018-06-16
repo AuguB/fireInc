@@ -120,6 +120,10 @@ public class Employee<E> implements Runnable {
         return fired;
     }
 
+    public void YouAreFired() {
+        fired = true;
+    }
+    
     public boolean isNeedsCoffee() {
         return needsCoffee;
     }
