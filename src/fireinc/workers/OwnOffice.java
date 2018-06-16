@@ -2,7 +2,7 @@ package fireinc.workers;
 
 import fireinc.visitors.Visitor;
 
-public class OwnOffice extends Promotion {
+public class OwnOffice<E> extends Promotion {
 
     private double squareMeters;
 
@@ -14,7 +14,7 @@ public class OwnOffice extends Promotion {
         super( ID);
     }
 
-    public Visitor accept(Visitor v) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public E accept(Visitor v) {
+        return (E) v.visit(this);
     }
 }

@@ -2,7 +2,7 @@ package fireinc.workers;
 
 import fireinc.visitors.Visitor;
 
-public class Raise extends Promotion {
+public class Raise<E> extends Promotion {
 
     private double value;
 
@@ -10,7 +10,7 @@ public class Raise extends Promotion {
         super( ID);
     }
 
-    public Visitor accept(Visitor v) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public E accept(Visitor v) {
+        return (E) v.visit(this);
     }
 }

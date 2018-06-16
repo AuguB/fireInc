@@ -7,6 +7,7 @@ import fireinc.workers.Designer;
 import fireinc.workers.Employee;
 import fireinc.workers.Manager;
 import fireinc.workers.OwnOffice;
+import fireinc.workers.Promotion;
 import fireinc.workers.Raise;
 import fireinc.workers.Tester;
 

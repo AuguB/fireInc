@@ -2,15 +2,15 @@ package fireinc.workers;
 
 import fireinc.visitors.Visitor;
 
-public class CompanyCar extends Promotion {
+public class CompanyCar<E> extends Promotion {
 
     private double horsePower;
 
     public CompanyCar(String ID) {
-        super( ID);
+        super(ID);
     }
 
-    public Visitor accept(Visitor v) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public E accept(Visitor v) {
+        return (E) v.visit(this);
     }
 }

@@ -12,8 +12,8 @@ public class Designer<E> extends Employee {
         
     }
 
-    public Visitor accept(Visitor v) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public E accept(Visitor v){
+        return (E) v.visit(this);
     }
 
     public void work() {

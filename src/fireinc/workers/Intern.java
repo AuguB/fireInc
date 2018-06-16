@@ -2,7 +2,7 @@ package fireinc.workers;
 
 import fireinc.visitors.Visitor;
 
-public class Intern extends Employee {
+public class Intern<E> extends Employee {
 
     public Intern(String name, String ID) {
         super(ID);
@@ -11,8 +11,9 @@ public class Intern extends Employee {
     public void run() {
     }
 
-    public Visitor accept(Visitor v) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    @Override
+    public E accept(Visitor v) {
+        return (E) v.visit(this);
     }
 
     public void print(int amount) {
