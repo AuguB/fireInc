@@ -8,6 +8,7 @@ public class Intern<E> extends Employee {
         super(ID);
     }
 
+    @Override
     public void run() {
          while (!fired) {
             days++;
