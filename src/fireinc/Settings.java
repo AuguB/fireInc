@@ -1,10 +1,15 @@
 package fireinc;
 
+import fireinc.NameGenerator.NameGenerator;
+import fireinc.NameGenerator.NameGeneratorOptions;
+
 /**
  *
  * @author guus
  */
 public class Settings {
+    
+    public static final NameGenerator NAME_GENERATOR = new NameGenerator();
 
     public static final int NROFPRINTERS = 6;
 

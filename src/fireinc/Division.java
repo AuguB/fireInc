@@ -21,10 +21,12 @@ public class Division implements Runnable {
 
     private double revenue;
 
-    private boolean closed = false;
+    private boolean closed;
     private double prevRev;
 
     public Division(DivisionIdentifier div) {
+        closed = false;
+        employees = new ArrayList<Employee>();
         lock = new ReentrantLock();
         prevRev = 0;
         revenue = 0;
@@ -46,6 +48,7 @@ public class Division implements Runnable {
                 System.out.println(divID.getName() + " hired a new manager: " + manager);
             }
             addRevenue(getRevenueFromEmployees());
+            System.out.println(revenue+" made by "+divID.getName());
         }
     }
 

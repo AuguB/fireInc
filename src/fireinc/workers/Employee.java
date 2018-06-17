@@ -1,6 +1,7 @@
 package fireinc.workers;
 
 import static fireinc.NameGenerator.NameGenerator.*;
+import static fireinc.Settings.*;
 import fireinc.enums.Gender;
 import fireinc.visitors.Visitor;
 import static java.lang.Math.random;
@@ -40,7 +41,7 @@ public abstract class Employee<E> implements Runnable {
         } else {
             this.gender = Gender.FEMALE;
         }
-        this.name = generateName(gender).toString();
+        this.name = NAME_GENERATOR.generateName(gender).toString();
         fired = false;
         needsCoffee = false;
         attitude = .4;
