@@ -9,11 +9,10 @@ import java.util.logging.Logger;
 
 public class Accountant<E> extends Employee {
     
-    private Lock lock;
+
 
     public Accountant(String ID) {
         super(ID);
-        lock = new ReentrantLock();
     }
 
     @Override

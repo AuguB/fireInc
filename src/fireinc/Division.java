@@ -57,44 +57,78 @@ public class Division implements Runnable {
     }
 
     public double getAverageWork() {
-        double sum = 0;
-        for (Employee e : employees) {
-            sum += (e.getCurrentWork() + e.getWorkDone());
+        lock.lock();
+        try {
+            double sum = 0;
+            for (Employee e : employees) {
+                sum += (e.getCurrentWork() + e.getWorkDone());
+            }
+            sum = sum / employees.size();
+            return sum;
+        } finally {
+            lock.unlock();
         }
-        sum = sum / employees.size();
-        return sum;
     }
 
     public void setManager(Manager man) {
-        this.manager = man;
+        lock.lock();
+        try {
+            this.manager = man;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public double getRevenueFromEmployees() {
-        double totalRev = 0;
-
-        for (Employee emp : employees) {
-            totalRev += emp.getCurrentWork();
+        lock.lock();
+        try {
+            double totalRev = 0;
+            for (Employee emp : employees) {
+                totalRev += emp.getCurrentWork();
+            }
+            prevRev = revenue;
+            revenue = totalRev;
+            return totalRev;
+        } finally {
+            lock.unlock();
         }
-        prevRev = revenue;
-        revenue = totalRev;
-        return totalRev;
     }
 
     public ArrayList<Employee> getEmps() {
-        return employees;
+        lock.lock();
+        try {
+            return employees;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public int getMax() {
-        return divID.getMaximum();
+        lock.lock();
+        try {
+            return divID.getMaximum();
+        } finally {
+            lock.unlock();
+        }
     }
 
     public int getMin() {
-        return divID.getMinimum();
+        lock.lock();
+        try {
+            return divID.getMinimum();
+        } finally {
+            lock.unlock();
+        }
     }
 
     public int getNextEmpNR() {
-        nrOfHiredEmps++;
-        return nrOfHiredEmps;
+        lock.lock();
+        try {
+            nrOfHiredEmps++;
+            return nrOfHiredEmps;
+        } finally {
+            lock.unlock();
+        }
     }
 
     private void addRevenue(double revenueFromEmployees) {
@@ -107,15 +141,30 @@ public class Division implements Runnable {
     }
 
     public double growth() {
-        return revenue / prevRev;
+        lock.lock();
+        try {
+            return revenue / prevRev;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public Manager getMan() {
-        return manager;
+        lock.lock();
+        try {
+            return manager;
+        } finally {
+            lock.unlock();
+        }
     }
 
     @Override
     public String toString() {
-        return divID.getName();
+        lock.lock();
+        try {
+            return divID.getName();
+        } finally {
+            lock.unlock();
+        }
     }
 }

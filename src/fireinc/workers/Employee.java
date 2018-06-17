@@ -82,7 +82,12 @@ public abstract class Employee<E> implements Runnable {
     }
 
     public E accept(Visitor v) {
-        return null;
+        lock.lock();
+        try {
+            return null;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public double getCurrentWork() {
@@ -90,7 +95,7 @@ public abstract class Employee<E> implements Runnable {
         try {
             workDone += currentWork;
             double temp = currentWork;
-//        currentWork = 0;
+            currentWork = 0;
             return temp;
         } finally {
             lock.unlock();
@@ -274,7 +279,7 @@ public abstract class Employee<E> implements Runnable {
     public boolean isFired() {
         lock.lock();
         try {
-            return isFired();
+            return fired;
         } finally {
             lock.unlock();
         }
@@ -362,13 +367,13 @@ public abstract class Employee<E> implements Runnable {
     }
 
     public void setMistakes(int mistakes) {
-    lock.lock();
+        lock.lock();
         try {
             this.mistakes = mistakes;
         } finally {
             lock.unlock();
         }
-}
+    }
 
     public void setNeedsCoffee(boolean needsCoffee) {
         lock.lock();

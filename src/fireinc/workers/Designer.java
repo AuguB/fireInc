@@ -9,11 +9,10 @@ import java.util.logging.Logger;
 
 public class Designer<E> extends Employee {
     
-    private Lock lock;
+ 
 
     public Designer(String ID) {
         super(ID);
-        lock = new ReentrantLock();
     }
 
     @Override

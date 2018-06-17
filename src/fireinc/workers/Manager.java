@@ -11,13 +11,12 @@ public class Manager<E> extends Employee {
 
     private HiringStrategy hiring;
     private Division div;
-    private Lock lock;
+
 
     public Manager(String ID, HiringStrategy hiring, Division div) {
         super(ID);
         this.hiring = hiring;
         this.div = div;
-        lock = new ReentrantLock();
     }
 
     public void run() {

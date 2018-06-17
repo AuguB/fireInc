@@ -12,12 +12,10 @@ import java.util.logging.Logger;
  * @author guus
  */
 public class HRSpecialist<E> extends Employee {
-    
-    private Lock lock;
+
 
     public HRSpecialist(String ID) {
         super(ID);
-        lock = new ReentrantLock();
     }
 
     public HRSpecialist(String ID, double pref) {

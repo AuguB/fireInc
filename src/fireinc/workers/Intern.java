@@ -16,7 +16,7 @@ import java.util.concurrent.locks.Lock;
 public class Intern<E> extends Employee {
 
     private Random random;
-    private Lock lock;
+
 
     public Intern(String ID) {
         super(ID);

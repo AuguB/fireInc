@@ -14,11 +14,10 @@ import java.util.logging.Logger;
  */
 public class Caterer<E> extends Employee {
     
-    private Lock lock;
+
 
     public Caterer(String ID) {
         super(ID);
-        lock = new ReentrantLock();
     }
 
     @Override

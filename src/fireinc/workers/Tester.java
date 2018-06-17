@@ -8,11 +8,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Tester<E> extends Employee {
-    private Lock lock;
+
 
     public Tester(String ID) {
         super(ID);
-        lock = new ReentrantLock();
     }
 
     public void run() {

@@ -26,12 +26,12 @@ public class Company {
     private static double revenue;
 
     public Company(String name) {
-        setOwners();
-        setDivisions();
-        setPrinters();
         NAME = name;
         revenue = 0;
         cycles = 0;
+        setOwners();
+        setDivisions();
+        setPrinters();
 
     }
 
