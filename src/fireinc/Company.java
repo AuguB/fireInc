@@ -8,6 +8,8 @@ import fireinc.strategies.FinanceHireStrategy;
 import fireinc.strategies.HRHireStrategy;
 import fireinc.strategies.ProductionHireStrategy;
 import fireinc.visitors.FireVisitor;
+import fireinc.visitors.PromotionVisitor;
+import fireinc.workers.Employee;
 import fireinc.workers.Manager;
 import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
@@ -37,8 +39,14 @@ public class Company {
         while (true) {
             for (Division d : divisions) {
                 if (d.growth() < 0.8) {
+                    d.getMan().YouAreFired();
+                } else if (d.growth() < 0.95) {
                     FireVisitor firing = new FireVisitor();
-                    d.accept(firing);
+                    for (Employee emp : d.getEmps()) {
+                        emp.accept(firing);
+                    }
+                }else if (d.growth()>1.2){
+                    promotionRound(d);
                 }
             }
         }
@@ -109,5 +117,13 @@ public class Company {
         } finally {
             lock.unlock();
         }
+    }
+
+    private void promotionRound(Division d) {
+        PromotionVisitor prom = new PromotionVisitor();
+        for(Employee emp: d.getEmps()){
+            
+        }
+        
     }
 }

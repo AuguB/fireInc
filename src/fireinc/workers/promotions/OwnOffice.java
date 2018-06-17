@@ -13,6 +13,11 @@ public class OwnOffice<E> extends Promotion {
     public OwnOffice(String ID) {
         super( ID);
     }
+    
+    @Override
+    public boolean hasOffice(){
+        return true;
+    }
 
     public E accept(Visitor v) {
         return (E) v.visit(this);

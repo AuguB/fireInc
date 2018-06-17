@@ -98,13 +98,11 @@ public class Division implements Runnable {
         }
     }
 
-    public void accept(FireVisitor firing) {
-        for (Employee emp : employees) {
-            emp.accept(firing);
-        }
-    }
-
     public double growth() {
         return revenue / prevRev;
+    }
+    
+    public Manager getMan(){
+        return manager;
     }
 }

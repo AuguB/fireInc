@@ -9,6 +9,11 @@ public class Raise<E> extends Promotion {
     public Raise(String ID) {
         super( ID);
     }
+    
+    @Override
+    public double getSalary(){
+        return 1.02*employee.getSalary();
+    }
 
     public E accept(Visitor v) {
         return (E) v.visit(this);

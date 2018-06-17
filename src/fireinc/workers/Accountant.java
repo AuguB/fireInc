@@ -30,6 +30,7 @@ public class Accountant<E> extends Employee {
     public E accept(Visitor v) {
         return (E) v.visit(this);
     }
+    
 
     public void work() {
         double result = 0;

@@ -5,7 +5,7 @@ import fireinc.workers.Employee;
 
 public class Promotion<E> extends Employee {
 
-    private Employee employee;
+    protected Employee employee;
 
     public Promotion(String ID) {
         super(ID);
@@ -13,6 +13,16 @@ public class Promotion<E> extends Employee {
 
     public E accept(Visitor v) {
         return (E) v.visit(this);
+    }
+    
+    @Override
+    public boolean hasCar(){
+        return employee.hasCar();
+    }
+    
+    @Override
+    public boolean hasOffice(){
+        return employee.hasCar();
     }
 
     @Override

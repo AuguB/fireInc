@@ -27,6 +27,7 @@ public abstract class Employee<E> implements Runnable {
     protected int attemptsToFire;
     protected boolean fired;
     protected boolean needsCoffee;
+    private double salary;
 
     public Employee(String ID) {
         this(ID, 0.5);
@@ -88,6 +89,18 @@ public abstract class Employee<E> implements Runnable {
         if (getAttitude() > 0) {
             setAttitude(getAttitude() - 0.0001);
         }
+    }
+
+    public boolean hasCar() {
+        return false;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public boolean hasOffice() {
+        return false;
     }
 
     private void makeRandomAttributes() {

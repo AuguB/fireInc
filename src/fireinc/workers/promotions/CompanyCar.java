@@ -10,6 +10,12 @@ public class CompanyCar<E> extends Promotion {
         super(ID);
     }
 
+    @Override
+    public boolean hasCar() {
+        return true;
+    }
+
+    @Override
     public E accept(Visitor v) {
         return (E) v.visit(this);
     }
