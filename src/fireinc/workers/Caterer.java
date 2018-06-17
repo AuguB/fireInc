@@ -6,6 +6,7 @@
 package fireinc.workers;
 
 import fireinc.visitors.Visitor;
+import static java.lang.Math.random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,7 +42,27 @@ public class Caterer<E> extends Employee {
     }
 
     private void work() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        double result = 0;
+        result += random(); //mood factor
+        result += cleanliness;
+        result += kitchening;
+        result += social;
+        result += workethics;
+        result += experience;
+        result += looks;
+        if (experience < 1) {
+            experience += 0.0001;
+        }
+        if (skill < 1) {
+            skill += 0.001;
+        }
+        if (needsCoffee) {
+            result -= 0.6;
+        }
+        if (randomNormal() < 1 - experience) {
+            mistakes += 1;
+        }
+        result = result / 7;
+        currentWork += result;
     }
-
 }

@@ -23,6 +23,7 @@ public abstract class Employee<E> implements Runnable {
     protected double experience;
     protected double kitchening;
     protected double workDone;
+    protected double currentWork;
     protected double attitude;
     protected int days;
     protected int mistakes;
@@ -30,8 +31,14 @@ public abstract class Employee<E> implements Runnable {
     protected boolean needsCoffee;
 
     public Employee(String ID) {
+        this(ID, 0.5);
+    }
+
+    public Employee(String ID, double preference) {
         this.ID = ID;
-        if (random() > 0.5) {
+        if (random() > preference) {
+            this.gender = Gender.MALE;
+        } else {
             this.gender = Gender.FEMALE;
         }
         this.name = generateName(gender).toString();
@@ -45,8 +52,14 @@ public abstract class Employee<E> implements Runnable {
         return null;
     }
 
-    public void run() {
+    public double getCurrentWork() {
+        workDone += currentWork;
+        double temp = currentWork;
+        currentWork = 0;
+        return temp;
+    }
 
+    public void run() {
     }
 
     public double results() {
@@ -71,7 +84,7 @@ public abstract class Employee<E> implements Runnable {
         this.workethics = randomNormal();
     }
 
-    private double randomNormal() {
+    protected double randomNormal() {
         return (random() + random()) / 2;
     }
 
