@@ -1,7 +1,6 @@
 package fireinc.strategies;
 
 import fireinc.workers.Accountant;
-import fireinc.workers.Caterer;
 import fireinc.workers.Employee;
 import fireinc.workers.Intern;
 import static java.lang.Math.random;
@@ -9,11 +8,12 @@ import static java.lang.Math.random;
 public class FinanceHireStrategy implements HiringStrategy {
 
     private final String DivID = "FIN";
-    private final int nrOfQualities = 4;
+    private final int nrOfQualities = 5;
 
     @Override
     public boolean isSkilledEnough(Employee emp, double managerThreshold) {
         double sum = (random() - 0.5);
+        sum += square(emp.getSkill());
         sum += square(emp.getPunctuality());
         sum += square(emp.getLoyalty());
         sum += square(emp.getCleanliness());

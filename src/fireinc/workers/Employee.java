@@ -1,9 +1,6 @@
 package fireinc.workers;
 
-import fireinc.Company;
 import static fireinc.NameGenerator.NameGenerator.*;
-import fireinc.NameGenerator.Name;
-import fireinc.NameGenerator.NameGenerator;
 import fireinc.enums.Gender;
 import fireinc.visitors.Visitor;
 import static java.lang.Math.random;
@@ -27,6 +24,7 @@ public abstract class Employee<E> implements Runnable {
     protected double attitude;
     protected int days;
     protected int mistakes;
+    protected int attemptsToFire;
     protected boolean fired;
     protected boolean needsCoffee;
 
@@ -46,6 +44,14 @@ public abstract class Employee<E> implements Runnable {
         needsCoffee = false;
         attitude = .4;
         makeRandomAttributes();
+    }
+
+    public int getAttemptsToFire() {
+        return attemptsToFire;
+    }
+
+    public void increaseAttemptsToFire() {
+        this.attemptsToFire++;
     }
 
     public int getMistakes() {
@@ -77,7 +83,6 @@ public abstract class Employee<E> implements Runnable {
     public double getDays() {
         return days;
     }
-
 
     public void decreaseFear() {
         if (getAttitude() > 0) {
@@ -203,19 +208,12 @@ public abstract class Employee<E> implements Runnable {
 
     public double getPrecision() {
         return (skill + experience) / 2;
-
     }
 
-    /**
-     * @return the attitude
-     */
     public double getAttitude() {
         return attitude;
     }
 
-    /**
-     * @param attitude the attitude to set
-     */
     public void setAttitude(double attitude) {
         this.attitude = attitude;
     }

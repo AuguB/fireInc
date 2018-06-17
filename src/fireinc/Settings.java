@@ -32,13 +32,28 @@ public class Settings {
     public static final int FIN_TOLERABLE_MISTAKES = 2;
     public static final int HR_TOLERABLE_MISTAKES = 5;
     public static final int PRO_TOLERABLE_MISTAKES = 10;
+
     public static final int MAN_TOLERABLE_MISTAKES = 7;
 
     public static final double EXP_GAIN = 0.0001;
     public static final double SKILL_GAIN = 0.001;
+
+    public static final int INTERN_TOLERABLE_MISTAKES = 20;
+
     
-    public static final double HARD_WORK = 0.8;
+    public static final double MIN_RESULTS = 0.9;
+
+    
+    public static final double HARD_WORK = 1.2;
     public static final double GOOD_LOOKS = 0.7;
     public static final double VERY_SOCIAL = 0.7;
     public static final double VERY_SKILLED = 0.8;
+    public static final double VERY_LOYAL = 0.8;
+    
+    public static final int EXPERIENCED_WORKER = 720; // 2 years
+    public static final int VETERAN_WORKER = 1800; // 5 years
+    public static final int ANCIENT_WORKER = 3600; // 10 years
+    public static final int LEGENDARY_WORKER = 7200; // 20 years
+    
+    public static final double SCORE_BONUS = 0.5;
 }

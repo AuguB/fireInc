@@ -34,8 +34,8 @@ public class Manager<E> extends Employee {
     public E accept(Visitor v) {
         return (E) v.visit(this);
     }
-    
-    public Division getDiv(){
+
+    public Division getDiv() {
         return div;
     }
 
@@ -61,7 +61,9 @@ public class Manager<E> extends Employee {
         }
         decreaseFear();
         currentWork += result;
-        
-        if(div.getEmps().size()<div.get)
+
+        if (div.getEmps().size() < div.getMax()) {
+            div.getEmps().add(hiring.hire(div.getNextEmpNR(), skill));
+        }
     }
 }
