@@ -61,6 +61,7 @@ public class Accountant<E> extends Employee {
         decreaseFear();
         result = result / 5.5;
         currentWork += result;
+        System.out.println(result);
     }
 
 

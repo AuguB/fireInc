@@ -5,10 +5,13 @@ import static fireinc.Settings.*;
 import fireinc.enums.Gender;
 import fireinc.visitors.Visitor;
 import static java.lang.Math.random;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public abstract class Employee<E> implements Runnable {
 
     protected String name;
+    protected Lock lock;
     protected String ID;
     protected double skill;
     protected Gender gender;
@@ -35,6 +38,7 @@ public abstract class Employee<E> implements Runnable {
     }
 
     public Employee(String ID, double preference) {
+        this.lock = new ReentrantLock();
         this.ID = ID;
         if (random() > preference) {
             this.gender = Gender.MALE;
@@ -45,6 +49,8 @@ public abstract class Employee<E> implements Runnable {
         fired = false;
         needsCoffee = false;
         attitude = .4;
+        currentWork = 0;
+        workDone = 0;
         makeRandomAttributes();
     }
 
@@ -65,31 +71,53 @@ public abstract class Employee<E> implements Runnable {
     }
 
     public double getCurrentWork() {
-        workDone += currentWork;
-        double temp = currentWork;
-        currentWork = 0;
-        return temp;
+        lock.lock();
+        try {
+            workDone += currentWork;
+            double temp = currentWork;
+//        currentWork = 0;
+            return temp;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public void run() {
     }
 
     public double getAverageWork() {
-        return (workDone + currentWork) / days;
+        lock.lock();
+        try {
+            return (workDone + currentWork) / days;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public double getWorkDone() {
-        return workDone;
+        lock.lock();
+        try {
+            return workDone;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public double getDays() {
-        return days;
+        lock.lock();
+        try {
+            return days;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public void decreaseFear() {
+        lock.lock();
         if (getAttitude() > 0) {
             setAttitude(getAttitude() - 0.0001);
         }
+        lock.unlock();
     }
 
     public boolean hasCar() {
@@ -97,7 +125,12 @@ public abstract class Employee<E> implements Runnable {
     }
 
     public double getSalary() {
-        return salary;
+        lock.lock();
+        try {
+            return salary;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public boolean hasOffice() {
