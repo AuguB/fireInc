@@ -1,6 +1,5 @@
 package fireinc.visitors;
 
-import fireinc.enums.Owner;
 import fireinc.workers.Accountant;
 import fireinc.workers.Caterer;
 import fireinc.workers.Coder;
@@ -13,7 +12,6 @@ import fireinc.workers.promotions.OwnOffice;
 import fireinc.workers.promotions.Promotion;
 import fireinc.workers.promotions.Raise;
 import fireinc.workers.Tester;
-import static java.lang.Math.random;
 
 public interface Visitor<E> {
 
@@ -40,15 +38,4 @@ public interface Visitor<E> {
     public E visit(Caterer c);
     
     public E visit(HRSpecialist h);
-
-    public default Owner getRandomOwner() {
-        double select = random();
-        if (select < 0.33) {
-            return Owner.MANTAS;
-        } else if (select < 0.66) {
-            return Owner.STIJN;
-        } else {
-            return Owner.RON;
-        }
-    }
 }

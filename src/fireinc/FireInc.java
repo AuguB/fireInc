@@ -18,7 +18,7 @@ public class FireInc {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Company company = new Company("FireInc");
+        Company company = new Company("Fire Inc.");
         company.start();
     }
 

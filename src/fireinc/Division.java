@@ -39,7 +39,7 @@ public class Division implements Runnable {
     @Override
     public void run() {
         Thread thread = new Thread(manager);
-        thread.run();
+        thread.start();
         while (!closed) {
             if (manager.isFired()) {
                 String ID = (nrOfManagers++ + divID.getName());

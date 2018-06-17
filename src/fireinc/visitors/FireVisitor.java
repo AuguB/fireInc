@@ -167,6 +167,6 @@ public class FireVisitor implements Visitor<Void> {
 
     private void fire(Employee e) {
         e.YouAreFired();
-        System.out.println(this.getRandomOwner() + " has fired " + e.getName());
+        System.out.println(getRandomOwner() + " has fired " + e.getName());
     }
 }

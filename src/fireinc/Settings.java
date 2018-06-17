@@ -2,6 +2,8 @@ package fireinc;
 
 import fireinc.NameGenerator.NameGenerator;
 import fireinc.NameGenerator.NameGeneratorOptions;
+import fireinc.enums.Owner;
+import static java.lang.Math.random;
 
 /**
  *
@@ -66,4 +68,17 @@ public class Settings {
     public static final double BASE_INTER_SALARY = 400;
     public static final double BASE_MANAGER_SALARY = 5000;
     public static final double BASE_TESTER_SALARY = 2500;
+    
+    public static final int COMPANY_CYCLES = 90;
+    
+    public static Owner getRandomOwner() {
+        double select = random();
+        if (select < 0.33) {
+            return Owner.MANTAS;
+        } else if (select < 0.66) {
+            return Owner.STIJN;
+        } else {
+            return Owner.RON;
+        }
+    }
 }

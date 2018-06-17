@@ -22,14 +22,17 @@ public class Company {
     private Lock lock;
     public static ArrayList<Printer> printers;
     private final String NAME;
+    private int cycles;
     private static double revenue;
 
     public Company(String name) {
-        setDivisions();
         setOwners();
+        setDivisions();
         setPrinters();
-        this.NAME = name;
-        this.revenue = 0;
+        NAME = name;
+        revenue = 0;
+        cycles = 0;
+
     }
 
     public void start() {
@@ -38,16 +41,26 @@ public class Company {
             thread.start();
         }
         while (true) {
-            for (Division d : divisions) {
-                if (d.growth() < 0.8) {
-                    d.getMan().YouAreFired();
-                } else if (d.growth() < 0.95) {
-                    FireVisitor firing = new FireVisitor();
-                    for (Employee emp : d.getEmps()) {
-                        emp.accept(firing);
+            cycles++;
+            if (cycles % COMPANY_CYCLES == 0) {
+                for (Division d : divisions) {
+                    if (d.growth() < 0.8) {
+                        System.out.println(d.getMan().getDiv() +
+                                " did very poorly this quater, fucking manager " +
+                                d.getMan().getName() + "got his ass fired by "
+                                + getRandomOwner() + "!");
+                        d.getMan().YouAreFired();
+                    } else if (d.growth() < 0.95) {
+                        System.out.println(d.getMan().getDiv() +
+                                " did poorly, so the firing season is starting!");
+                        FireVisitor firing = new FireVisitor();
+                        for (Employee emp : d.getEmps()) {
+                            emp.accept(firing);
+                        }
+                    } else if (d.growth() > 1.2) {
+                        System.out.println("Good news! " + d.getMan().getDiv() + " did very well, so promotion season starts!");
+                        promotionRound(d);
                     }
-                } else if (d.growth() > 1.2) {
-                    promotionRound(d);
                 }
             }
         }
@@ -63,29 +76,37 @@ public class Company {
 
     private Division productionDivision() {
         Division div = new Division(DivisionIdentifier.PRODUCTION);
+        System.out.println("Production division established");
         Manager man = new Manager("PROM1", new ProductionHireStrategy(), div);
         div.setManager(man);
+        System.out.println("New manager " + man.getName() + " has been hired by " + getRandomOwner() + " for " + man.getDiv());
         return div;
     }
 
     private Division financeDivision() {
         Division div = new Division(DivisionIdentifier.FINANCE);
+        System.out.println("Finance division established");
         Manager man = new Manager("FINM1", new FinanceHireStrategy(), div);
         div.setManager(man);
+        System.out.println("New manager " + man.getName() + " has been hired by " + getRandomOwner() + " for " + man.getDiv());
         return div;
     }
 
     private Division caterDivision() {
         Division div = new Division(DivisionIdentifier.CATERING);
+        System.out.println("Catering division established");
         Manager man = new Manager("CATM1", new CaterHireStrategy(), div);
         div.setManager(man);
+        System.out.println("New manager " + man.getName() + " has been hired by " + getRandomOwner() + " for " + man.getDiv());
         return div;
     }
 
     private Division HRDivision() {
         Division div = new Division(DivisionIdentifier.HR);
+        System.out.println("Human Resource division established");
         Manager man = new Manager("HRM1", new HRHireStrategy(), div);
         div.setManager(man);
+        System.out.println("New manager " + man.getName() + " has been hired by " + getRandomOwner() + " for " + man.getDiv());
         return div;
     }
 
@@ -94,6 +115,7 @@ public class Company {
         owners.add(Owner.RON);
         owners.add(Owner.STIJN);
         owners.add(Owner.MANTAS);
+        System.out.println("Owners have bought the compnay " + NAME);
     }
 
     private void setPrinters() {
