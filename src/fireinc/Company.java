@@ -1,6 +1,7 @@
 package fireinc;
 
 import static fireinc.Settings.*;
+import fireinc.enums.DivisionIdentifier;
 import fireinc.enums.Owner;
 import fireinc.strategies.CaterHireStrategy;
 import fireinc.strategies.FinanceHireStrategy;
@@ -13,7 +14,7 @@ public class Company {
 
     private ArrayList<Division> divisions;
     private ArrayList<Owner> owners;
-    private ArrayList<Printer> printers;
+    public static ArrayList<Printer> printers;
     private final String NAME;
 
     public Company(String name) {
@@ -32,28 +33,28 @@ public class Company {
     }
 
     private Division productionDivision() {
-        Division div = new Division("Production", PRODMIN, PRODMAX);
+        Division div = new Division(DivisionIdentifier.PRODUCTION);
         Manager man = new Manager("PROM1", new ProductionHireStrategy(), div);
         div.setManager(man);
         return div;
     }
 
     private Division financeDivision() {
-        Division div = new Division("Finance", FINMIN, FINMAX);
+        Division div = new Division(DivisionIdentifier.FINANCE);
         Manager man = new Manager("FINM1", new FinanceHireStrategy(), div);
         div.setManager(man);
         return div;
     }
 
     private Division caterDivision() {
-        Division div = new Division("Catering", CATMIN, CATMAX);
+        Division div = new Division(DivisionIdentifier.CATERING);
         Manager man = new Manager("CATM1", new CaterHireStrategy(), div);
         div.setManager(man);
         return div;
     }
 
     private Division HRDivision() {
-        Division div = new Division("Human Resources", HRMIN, HRMAX);
+        Division div = new Division(DivisionIdentifier.HR);
         Manager man = new Manager("HRM1", new HRHireStrategy(), div);
         div.setManager(man);
         return div;
@@ -80,5 +81,5 @@ public class Company {
     public ArrayList<Printer> getPrinters() {
         return printers;
     }
-
+    
 }

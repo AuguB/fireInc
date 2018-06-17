@@ -46,6 +46,18 @@ public abstract class Employee<E> implements Runnable {
         makeRandomAttributes();
     }
 
+    public int getAttemptsToFire() {
+        return attemptsToFire;
+    }
+
+    public void increaseAttemptsToFire() {
+        this.attemptsToFire++;
+    }
+    
+    public int getMistakes() {
+        return mistakes;
+    }
+
     public E accept(Visitor v) {
         return null;
     }
@@ -59,9 +71,17 @@ public abstract class Employee<E> implements Runnable {
 
     public void run() {
     }
+    
+    public double getAverageWork(){
+        return (workDone+currentWork)/days;
+    }
+    
+    public double getWorkDone() {
+        return workDone;
+    }
 
-    public double getResults() {
-        return workDone / days;
+    public double getDays() {
+        return days;
     }
 
     public void decreaseFear() {
@@ -182,10 +202,9 @@ public abstract class Employee<E> implements Runnable {
         this.needsCoffee = needsCoffee;
     }
     
-    public int getMistakes() {
-        return mistakes;
+    public void setKitchening(double kitchening) {
+        this.kitchening = kitchening;
     }
-
 
     public double getPrecision() {
         return (skill + experience) / 2;

@@ -13,15 +13,11 @@ import fireinc.enums.Gender;
  * @author guus
  */
 public class FireInc {
-
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
-//        NameGenerator generator = new NameGenerator();
-//        System.out.println(generator.generateName(Gender.FEMALE));
-//        System.out.println(generator.generateName(Gender.MALE));
     }
 
 }
