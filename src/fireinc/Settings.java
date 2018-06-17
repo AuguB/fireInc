@@ -35,4 +35,9 @@ public class Settings {
 
     public static final double EXP_GAIN = 0.0001;
     public static final double SKILL_GAIN = 0.001;
+    
+    public static final double HARD_WORK = 0.8;
+    public static final double GOOD_LOOKS = 0.7;
+    public static final double VERY_SOCIAL = 0.7;
+    public static final double VERY_SKILLED = 0.8;
 }

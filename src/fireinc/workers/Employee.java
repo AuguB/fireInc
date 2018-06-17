@@ -48,6 +48,10 @@ public abstract class Employee<E> implements Runnable {
         makeRandomAttributes();
     }
 
+    public int getMistakes() {
+        return mistakes;
+    }
+
     public E accept(Visitor v) {
         return null;
     }
@@ -60,6 +64,18 @@ public abstract class Employee<E> implements Runnable {
     }
 
     public void run() {
+    }
+    
+    public double getAverageWork(){
+        return (workDone+currentWork)/days;
+    }
+    
+    public double getWorkDone() {
+        return workDone;
+    }
+
+    public double getDays() {
+        return days;
     }
 
     public double results() {
@@ -192,6 +208,7 @@ public abstract class Employee<E> implements Runnable {
         return mistakes;
     }
             
+
     public double getPrecision() {
         return (skill + experience) / 2;
 

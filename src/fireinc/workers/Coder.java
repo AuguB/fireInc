@@ -14,6 +14,7 @@ public class Coder<E> extends Employee {
     @Override
     public void run() {
         while (!fired) {
+            days++;
             try {
                 work();
                 Thread.sleep(300); //lunchbreak
