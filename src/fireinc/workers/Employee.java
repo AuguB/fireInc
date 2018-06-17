@@ -193,7 +193,8 @@ public abstract class Employee<E> implements Runnable {
     }
             
     public double getPrecision() {
-        return (skill+experience)/2;
+        return (skill + experience) / 2;
+
     }
 
     /**

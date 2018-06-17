@@ -63,11 +63,10 @@ public class Intern<E> extends Employee {
         }
         if (skill < 1) {
             skill += 0.001;
-        }
-
-        result /= 8.5;
-
-        if (result < 0.5) {
+        
+        result /= 7.5;
+        
+        if(result < 0.5)
             mistakes++;
         }
 
