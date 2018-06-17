@@ -6,6 +6,7 @@ import fireinc.workers.Caterer;
 import fireinc.workers.Coder;
 import fireinc.workers.promotions.CompanyCar;
 import fireinc.workers.Designer;
+import fireinc.workers.HRSpecialist;
 import fireinc.workers.Intern;
 import fireinc.workers.Manager;
 import fireinc.workers.promotions.OwnOffice;
@@ -37,6 +38,8 @@ public interface Visitor<E> {
     public E visit(Promotion p);
 
     public E visit(Caterer c);
+    
+    public E visit(HRSpecialist h);
 
     public default Owner getRandomOwner() {
         double select = random();

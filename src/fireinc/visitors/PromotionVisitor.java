@@ -5,6 +5,7 @@ import fireinc.workers.Caterer;
 import fireinc.workers.Coder;
 import fireinc.workers.promotions.CompanyCar;
 import fireinc.workers.Designer;
+import fireinc.workers.HRSpecialist;
 import fireinc.workers.Intern;
 import fireinc.workers.Manager;
 import fireinc.workers.promotions.OwnOffice;
@@ -67,6 +68,11 @@ public class PromotionVisitor implements Visitor<Boolean>{
 
     @Override
     public Boolean visit(Caterer c) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Boolean visit(HRSpecialist h) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

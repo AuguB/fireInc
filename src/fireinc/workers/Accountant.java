@@ -47,7 +47,7 @@ public class Accountant<E> extends Employee {
         if (needsCoffee) {
             result -= 0.6;
         }
-        if (randomNormal() < 1 - skill / experience) {
+        if (randomNormal() < 1 - experience) {
             mistakes += 1;
         }
         result = result / 5;

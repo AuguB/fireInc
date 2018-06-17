@@ -1,6 +1,9 @@
 package fireinc.strategies;
 
+import fireinc.workers.Accountant;
+import fireinc.workers.Caterer;
 import fireinc.workers.Employee;
+import fireinc.workers.Intern;
 import static java.lang.Math.random;
 
 public class FinanceHireStrategy implements HiringStrategy {
@@ -21,7 +24,12 @@ public class FinanceHireStrategy implements HiringStrategy {
 
     @Override
     public Employee getEmployee(int ID) {
-        return new Employee(DivID + "-" + ID);
+        double randomEmp = random();
+        if (randomEmp > 0.75) {
+            return new Accountant(DivID + "-" + ID);
+        } else {
+            return new Intern(DivID + "-" + ID);
+        }
     }
 
 }
