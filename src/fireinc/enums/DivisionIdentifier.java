@@ -6,6 +6,11 @@
 package fireinc.enums;
 
 import static fireinc.Settings.*;
+import fireinc.strategies.CaterHireStrategy;
+import fireinc.strategies.FinanceHireStrategy;
+import fireinc.strategies.HRHireStrategy;
+import fireinc.strategies.HiringStrategy;
+import fireinc.strategies.ProductionHireStrategy;
 
 /**
  *
@@ -13,19 +18,21 @@ import static fireinc.Settings.*;
  */
 public enum DivisionIdentifier {
 
-    FINANCE(FINMIN, FINMAX, "FIN"),
-    PRODUCTION(PRODMIN, PRODMAX, "PROD"),
-    CATERING(CATMIN, CATMAX, "CAT"),
-    HR(HRMIN, HRMAX, "HR");
+    FINANCE(FINMIN, FINMAX, "FIN", new FinanceHireStrategy()),
+    PRODUCTION(PRODMIN, PRODMAX, "PROD", new ProductionHireStrategy()),
+    CATERING(CATMIN, CATMAX, "CAT", new CaterHireStrategy()),
+    HR(HRMIN, HRMAX, "HR", new HRHireStrategy());
 
     private final int minimum;
     private final int maximum;
     private final String name;
+    private final HiringStrategy hiring;
 
-    DivisionIdentifier(int min, int max, String name) {
+    DivisionIdentifier(int min, int max, String name, HiringStrategy hiring) {
         this.minimum = min;
         this.maximum = max;
         this.name = name;
+        this.hiring = hiring;
     }
 
     public int getMinimum() {
@@ -34,5 +41,13 @@ public enum DivisionIdentifier {
 
     public int getMaximum() {
         return maximum;
+    }
+
+    public String getName() {
+        return name;
+    }
+    
+    public HiringStrategy getHiring(){
+        return hiring;
     }
 }

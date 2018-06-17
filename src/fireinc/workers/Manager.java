@@ -40,6 +40,11 @@ public class Manager<E> extends Employee {
     }
 
     public void work() {
+        produceResult();
+        hireNewPeople();
+    }
+
+    private void produceResult() {
         double result = 0;
         result += skill;
         result += experience;
@@ -61,7 +66,9 @@ public class Manager<E> extends Employee {
         }
         decreaseFear();
         currentWork += result;
+    }
 
+    private void hireNewPeople() {
         if (div.getEmps().size() < div.getMax()) {
             div.getEmps().add(hiring.hire(div.getNextEmpNR(), skill));
         }

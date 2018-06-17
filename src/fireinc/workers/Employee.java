@@ -217,4 +217,9 @@ public abstract class Employee<E> implements Runnable {
     public void setAttitude(double attitude) {
         this.attitude = attitude;
     }
+
+    @Override
+    public String toString() {
+        return name + " " + ID;
+    }
 }
