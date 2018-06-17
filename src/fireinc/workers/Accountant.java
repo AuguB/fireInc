@@ -50,6 +50,7 @@ public class Accountant<E> extends Employee {
         if (randomNormal() < 1 - experience) {
             mistakes += 1;
         }
+        decreaseFear();
         result = result / 5;
         currentWork += result;
     }

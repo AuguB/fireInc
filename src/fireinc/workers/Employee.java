@@ -65,11 +65,11 @@ public abstract class Employee<E> implements Runnable {
 
     public void run() {
     }
-    
-    public double getAverageWork(){
-        return (workDone+currentWork)/days;
+
+    public double getAverageWork() {
+        return (workDone + currentWork) / days;
     }
-    
+
     public double getWorkDone() {
         return workDone;
     }
@@ -78,9 +78,6 @@ public abstract class Employee<E> implements Runnable {
         return days;
     }
 
-    public double results() {
-        return workDone / days;
-    }
 
     public void decreaseFear() {
         if (getAttitude() > 0) {
@@ -199,15 +196,10 @@ public abstract class Employee<E> implements Runnable {
     public void setNeedsCoffee(boolean needsCoffee) {
         this.needsCoffee = needsCoffee;
     }
-    
+
     public void setKitchening(double kitchening) {
         this.kitchening = kitchening;
     }
-    
-    public int getMistakes() {
-        return mistakes;
-    }
-            
 
     public double getPrecision() {
         return (skill + experience) / 2;
