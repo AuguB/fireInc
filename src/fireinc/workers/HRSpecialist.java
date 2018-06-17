@@ -45,6 +45,9 @@ public class HRSpecialist<E> extends Employee {
     }
 
     private void work() {
+        if (days >= 9) {
+            needsCoffee = true;
+        }
         double result = 0;
         result += random(); //mood factor
         result += cleanliness;

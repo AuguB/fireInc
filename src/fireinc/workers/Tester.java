@@ -31,7 +31,10 @@ public class Tester<E> extends Employee {
     }
 
     public void work() {
-         double result = 0;
+        if (days >= 10) {
+            needsCoffee = true;
+        }
+        double result = 0;
         result += skill;
         result += punctuality;
         result += cleanliness;

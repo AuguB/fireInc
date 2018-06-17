@@ -42,6 +42,9 @@ public class Caterer<E> extends Employee {
     }
 
     private void work() {
+        if (days >= 10) {
+            needsCoffee = true;
+        }
         double result = 0;
         result += random(); //mood factor
         result += cleanliness;

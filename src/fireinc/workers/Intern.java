@@ -1,6 +1,7 @@
 package fireinc.workers;
 
 import fireinc.Company;
+import fireinc.Division;
 import fireinc.visitors.Visitor;
 import java.util.Random;
 import java.util.logging.Level;
@@ -33,7 +34,7 @@ public class Intern<E> extends Employee {
         return (E) v.visit(this);
     }
 
-    public void print(int amount) {
+    private void print(int amount) {
         int gotPrinters = amount;
         for (int i = 0; i < Company.printers.size(); i++) {
             while (gotPrinters > 0) {
@@ -47,12 +48,16 @@ public class Intern<E> extends Employee {
                         ex.printStackTrace();
                     }
                 }
-                
+
             }
         }
     }
 
     public void work() {
+        if (days >= 10) {
+            needsCoffee = true;
+        }
+        bringCoffee();
 
         int nrOfCopies = random.nextInt(3) + 1;
         print(nrOfCopies);
@@ -72,15 +77,27 @@ public class Intern<E> extends Employee {
         }
         if (skill < 1) {
             skill += 0.001;
-        
-        result /= 7.5;
-        
-        if(result < 0.5)
-            mistakes++;
-        }
 
+            result /= 7.5;
+
+            if (result < 0.5) {
+                mistakes++;
+            }
+        }
+        bringCoffee();
         decreaseFear();
 
         currentWork += result;
     }
+
+    private void bringCoffee() {
+        for (Division div : Company.divisions) {
+            for (Employee emp : div.getEmps()) {
+                if (emp.needsCoffee) {
+                    emp.needsCoffee = false;
+                }
+            }
+        }
+    }
+
 }

@@ -40,6 +40,9 @@ public class Manager<E> extends Employee {
     }
 
     public void work() {
+        if (days >= 5) {
+            needsCoffee = true;
+        }
         double result = 0;
         result += skill;
         result += experience;

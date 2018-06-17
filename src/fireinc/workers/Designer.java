@@ -33,6 +33,9 @@ public class Designer<E> extends Employee {
     }
 
     public void work() {
+        if (days >= 7) {
+            needsCoffee = true;
+        }
         double result = 0;
         result += skill;
         result += punctuality;

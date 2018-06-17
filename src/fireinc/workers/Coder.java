@@ -32,6 +32,9 @@ public class Coder<E> extends Employee {
     }
 
     public void work() {
+        if (days >= 5) {
+            needsCoffee = true;
+        }
         double result = 0;
         result += random(); //mood factor
         result += 0.5 - Math.abs(0.5 - attitude);

@@ -32,6 +32,8 @@ public class Accountant<E> extends Employee {
     }
 
     public void work() {
+        if(days>=10)
+            needsCoffee = true;
         double result = 0;
         result += random(); //mood factor
         result += skill;
