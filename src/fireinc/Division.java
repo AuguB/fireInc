@@ -90,7 +90,6 @@ public class Division implements Runnable {
     }
 
 
-
     private void addRevenue(double revenueFromEmployees) {
         lock.lock();
         try {
@@ -109,5 +108,4 @@ public class Division implements Runnable {
     public double growth() {
         return revenue / prevRev;
     }
-
 }

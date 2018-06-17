@@ -2,7 +2,10 @@ package fireinc.workers;
 
 import fireinc.Company;
 
+
 import fireinc.Division;
+
+import static fireinc.Settings.*;
 
 import static fireinc.Settings.*;
 
@@ -79,6 +82,7 @@ public class Intern<E> extends Employee {
         }
         if (skill < 1) {
 
+
             skill += 0.001;
 
             result /= 7.5;
@@ -96,8 +100,16 @@ public class Intern<E> extends Employee {
         }
         if (randomNormal() > getPrecision()) {
             mistakes += 1;
-        }
 
+            skill += SKILL_GAIN;
+
+        }
+        if (needsCoffee) {
+            result -= COFFEE_NEED_PENALTY;
+        }
+        if (randomNormal() > getPrecision()) {
+            mistakes += 1;
+        }
         decreaseFear();
         result = result / 8.5;
         currentWork += result;
