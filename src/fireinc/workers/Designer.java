@@ -1,8 +1,7 @@
 package fireinc.workers;
 
-import fireinc.Settings;
+import static fireinc.Settings.*;
 import fireinc.visitors.Visitor;
-import static java.lang.Math.random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,21 +33,27 @@ public class Designer<E> extends Employee {
 
     public void work() {
         double result = 0;
+        result += randomNormal(); //mood factor
+        result += 0.5 - Math.abs(0.5 - attitude);
         result += skill;
         result += punctuality;
         result += social;
         result += experience;
         result += cleanliness;
-        result += 0.5 - Math.abs(0.5 - attitude);
         if (experience < 1) {
-            experience += Settings.EXP_GAIN;
+            experience += EXP_GAIN;
         }
         if (skill < 1) {
-            skill += Settings.SKILL_GAIN;
+            skill += SKILL_GAIN;
         }
-        if (random() > getPrecision()) {
-            mistakes++;
+        if (needsCoffee) {
+            result -= COFFEE_NEED;
         }
-        workDone += result;
+        if (randomNormal() > getPrecision()) {
+            mistakes += 1;
+        }
+        decreaseFear();
+        result = result / 6.5;
+        currentWork += result;
     }
 }

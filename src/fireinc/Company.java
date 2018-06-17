@@ -14,7 +14,7 @@ import java.util.concurrent.locks.Lock;
 
 public class Company {
 
-    private ArrayList<Division> divisions;
+    public static ArrayList<Division> divisions;
     private ArrayList<Owner> owners;
     private Lock lock;
     public static ArrayList<Printer> printers;
