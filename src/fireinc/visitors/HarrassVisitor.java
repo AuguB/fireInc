@@ -44,12 +44,17 @@ public class HarrassVisitor implements Visitor<Void> {
     @Override
     public Void visit(Tester t) {
         t.setLoyalty(t.getLoyalty()-getNormalRand());
+        t.setAttitude(t.getAttitude()+getNormalRand());
+        t.setWorkethics(t.getWorkethics()-getNormalRand());
         t.setNeedsCoffee(true);
         return null;
     }
 
     @Override
     public Void visit(Designer d) {
+        d.setCleanliness(d.getCleanliness()-getNormalRand());
+        d.setPunctuality(d.getPunctuality()-getNormalRand());
+        d.setSocial(d.getSocial()-getNormalRand());
         d.setNeedsCoffee(true);
         return null;
     }
