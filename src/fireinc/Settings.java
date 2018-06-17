@@ -27,4 +27,11 @@ public class Settings {
     public static final double HR_FEMALE_PREFERENCE = 0.8;
     public static final double MALE_FEMALE_RATIO = 0.5;
     
+    public static final int CAT_TOLERABLE_MISTAKES = 0;
+    public static final int FIN_TOLERABLE_MISTAKES = 2;
+    public static final int HR_TOLERABLE_MISTAKES = 5;
+    public static final int PRO_TOLERABLE_MISTAKES = 10;
+    
+    public static final double EXP_GAIN = 0.0001;
+    public static final double SKILL_GAIN = 0.001;
 }
