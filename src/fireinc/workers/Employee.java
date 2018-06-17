@@ -5,10 +5,13 @@ import static fireinc.Settings.*;
 import fireinc.enums.Gender;
 import fireinc.visitors.Visitor;
 import static java.lang.Math.random;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public abstract class Employee<E> implements Runnable {
 
     protected String name;
+    protected Lock lock;
     protected String ID;
     protected double skill;
     protected Gender gender;
@@ -35,6 +38,7 @@ public abstract class Employee<E> implements Runnable {
     }
 
     public Employee(String ID, double preference) {
+        this.lock = new ReentrantLock();
         this.ID = ID;
         if (random() > preference) {
             this.gender = Gender.MALE;
@@ -45,19 +49,36 @@ public abstract class Employee<E> implements Runnable {
         fired = false;
         needsCoffee = false;
         attitude = .4;
+        currentWork = 0;
+        workDone = 0;
         makeRandomAttributes();
     }
 
     public int getAttemptsToFire() {
-        return attemptsToFire;
+        lock.lock();
+        try {
+            return attemptsToFire;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public void increaseAttemptsToFire() {
-        this.attemptsToFire++;
+        lock.lock();
+        try {
+            this.attemptsToFire++;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public int getMistakes() {
-        return mistakes;
+        lock.lock();
+        try {
+            return mistakes;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public E accept(Visitor v) {
@@ -65,31 +86,53 @@ public abstract class Employee<E> implements Runnable {
     }
 
     public double getCurrentWork() {
-        workDone += currentWork;
-        double temp = currentWork;
-        currentWork = 0;
-        return temp;
+        lock.lock();
+        try {
+            workDone += currentWork;
+            double temp = currentWork;
+//        currentWork = 0;
+            return temp;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public void run() {
     }
 
     public double getAverageWork() {
-        return (workDone + currentWork) / days;
+        lock.lock();
+        try {
+            return (workDone + currentWork) / days;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public double getWorkDone() {
-        return workDone;
+        lock.lock();
+        try {
+            return workDone;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public double getDays() {
-        return days;
+        lock.lock();
+        try {
+            return days;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public void decreaseFear() {
+        lock.lock();
         if (getAttitude() > 0) {
             setAttitude(getAttitude() - 0.0001);
         }
+        lock.unlock();
     }
 
     public boolean hasCar() {
@@ -97,7 +140,12 @@ public abstract class Employee<E> implements Runnable {
     }
 
     public double getSalary() {
-        return salary;
+        lock.lock();
+        try {
+            return salary;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public boolean hasOffice() {
@@ -121,15 +169,30 @@ public abstract class Employee<E> implements Runnable {
     }
 
     public String getName() {
-        return name;
+        lock.lock();
+        try {
+            return name;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public String getID() {
-        return ID;
+        lock.lock();
+        try {
+            return ID;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public double getSkill() {
-        return skill;
+        lock.lock();
+        try {
+            return skill;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public Gender getGender() {
@@ -137,103 +200,228 @@ public abstract class Employee<E> implements Runnable {
     }
 
     public double getPunctuality() {
-        return punctuality;
+        lock.lock();
+        try {
+            return punctuality;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public double getCleanliness() {
-        return cleanliness;
+        lock.lock();
+        try {
+            return cleanliness;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public double getSocial() {
-        return social;
+        lock.lock();
+        try {
+            return social;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public double getLoyalty() {
-        return loyalty;
+        lock.lock();
+        try {
+            return loyalty;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public double getLooks() {
-        return looks;
+        lock.lock();
+        try {
+            return looks;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public double getWorkethics() {
-        return workethics;
+        lock.lock();
+        try {
+            return workethics;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public double getExperience() {
-        return experience;
+        lock.lock();
+        try {
+            return experience;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public double getKitchening() {
-        return kitchening;
+        lock.lock();
+        try {
+            return kitchening;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public boolean isFired() {
-        return fired;
+        lock.lock();
+        try {
+            return isFired();
+        } finally {
+            lock.unlock();
+        }
     }
 
     public void YouAreFired() {
-        fired = true;
+        lock.lock();
+        try {
+            fired = true;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public boolean isNeedsCoffee() {
-        return needsCoffee;
+        lock.lock();
+        try {
+            return needsCoffee;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public void setSkill(double skill) {
-        this.skill = skill;
+        lock.lock();
+        try {
+            this.skill = skill;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public void setPunctuality(double punctuality) {
-        this.punctuality = punctuality;
+        lock.lock();
+        try {
+            this.punctuality = punctuality;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public void setCleanliness(double cleanliness) {
-        this.cleanliness = cleanliness;
+        lock.lock();
+        try {
+            this.cleanliness = cleanliness;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public void setSocial(double social) {
-        this.social = social;
+        lock.lock();
+        try {
+            this.social = social;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public void setLoyalty(double loyalty) {
-        this.loyalty = loyalty;
+        lock.lock();
+        try {
+            this.loyalty = loyalty;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public void setWorkethics(double workethics) {
-        this.workethics = workethics;
+        lock.lock();
+        try {
+            this.workethics = workethics;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public void setWorkDone(double workDone) {
-        this.workDone = workDone;
+        lock.lock();
+        try {
+            this.workDone = workDone;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public void setMistakes(int mistakes) {
-        this.mistakes = mistakes;
-    }
+    lock.lock();
+        try {
+            this.mistakes = mistakes;
+        } finally {
+            lock.unlock();
+        }
+}
 
     public void setNeedsCoffee(boolean needsCoffee) {
-        this.needsCoffee = needsCoffee;
+        lock.lock();
+        try {
+            this.needsCoffee = needsCoffee;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public void setKitchening(double kitchening) {
-        this.kitchening = kitchening;
+        lock.lock();
+        try {
+            this.kitchening = kitchening;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public double getPrecision() {
-        return (skill + experience) / 2;
+        lock.lock();
+        try {
+            return (skill + experience) / 2;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public double getAttitude() {
-        return attitude;
+        lock.lock();
+        try {
+            return attitude;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public void setAttitude(double attitude) {
-        this.attitude = attitude;
+        lock.lock();
+        try {
+            this.attitude = attitude;
+        } finally {
+            lock.unlock();
+        }
     }
 
     @Override
     public String toString() {
-        return name + " " + ID;
+        lock.lock();
+        try {
+            return name + " " + ID;
+        } finally {
+            lock.unlock();
+        }
     }
 }

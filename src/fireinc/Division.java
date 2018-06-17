@@ -40,15 +40,19 @@ public class Division implements Runnable {
     public void run() {
         Thread thread = new Thread(manager);
         thread.start();
+        Thread newThread = new Thread(manager);
+        newThread.start();
         while (!closed) {
             if (manager.isFired()) {
                 String ID = (nrOfManagers++ + divID.getName());
                 HiringStrategy hiring = divID.getHiring();
                 manager = new Manager(ID, hiring, this);
                 System.out.println(divID.getName() + " hired a new manager: " + manager);
+                newThread = new Thread(manager);
+                newThread.start();
             }
             addRevenue(getRevenueFromEmployees());
-            System.out.println(revenue+" made by "+divID.getName());
+//            System.out.println(revenue+" made by "+divID.getName());
         }
     }
 
@@ -67,6 +71,7 @@ public class Division implements Runnable {
 
     public double getRevenueFromEmployees() {
         double totalRev = 0;
+
         for (Employee emp : employees) {
             totalRev += emp.getCurrentWork();
         }
@@ -92,7 +97,6 @@ public class Division implements Runnable {
         return nrOfHiredEmps;
     }
 
-
     private void addRevenue(double revenueFromEmployees) {
         lock.lock();
         try {
@@ -105,13 +109,13 @@ public class Division implements Runnable {
     public double growth() {
         return revenue / prevRev;
     }
-    
-    public Manager getMan(){
+
+    public Manager getMan() {
         return manager;
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return divID.getName();
     }
 }
