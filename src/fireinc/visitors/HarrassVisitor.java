@@ -62,17 +62,17 @@ public class HarrassVisitor implements Visitor<Void> {
 
     @Override
     public Void visit(Raise r) {
-        return null;
+        return (Void) r.getEmp().accept(this);
     }
 
     @Override
     public Void visit(CompanyCar c) {
-        return null;
+        return (Void) c.getEmp().accept(this);
     }
 
     @Override
     public Void visit(OwnOffice o) {
-        return null;
+        return (Void) o.getEmp().accept(this);
     }
 
     @Override
@@ -101,7 +101,7 @@ public class HarrassVisitor implements Visitor<Void> {
 
     @Override
     public Void visit(Promotion p) {
-        return null;
+        return (Void) p.getEmp().accept(this);
     }
 
     @Override

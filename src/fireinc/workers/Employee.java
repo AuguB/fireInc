@@ -203,10 +203,7 @@ public abstract class Employee<E> implements Runnable {
     public void setKitchening(double kitchening) {
         this.kitchening = kitchening;
     }
-    
-    public int getMistakes() {
-        return mistakes;
-    }
+   
             
 
     public double getPrecision() {

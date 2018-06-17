@@ -28,7 +28,11 @@ public class Division implements Runnable{
     }
     
     public double getRevenue() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        double totalRev = 0;
+        for(Employee emp: employees) {
+            totalRev += emp.getCurrentWork();
+        }
+        return totalRev;
     }
 
     @Override
