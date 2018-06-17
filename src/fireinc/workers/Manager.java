@@ -17,7 +17,7 @@ public class Manager<E> extends Employee {
     }
 
     public void run() {
-         while (!fired) {
+        while (!fired) {
             days++;
             try {
                 work();
@@ -37,26 +37,29 @@ public class Manager<E> extends Employee {
 
     public void work() {
         double result = 0;
-        result += skill 
-               += experience 
-               += workethics
-               += loyalty
-               += looks
-               += punctuality
-               += 0.5-Math.abs(0.5-getAttitude());
-        
-        if(experience < 1)
+        result += skill;
+        result += experience;
+        result += workethics;
+        result += loyalty;
+        result += looks;
+        result += punctuality;
+        result += 0.5 - Math.abs(0.5 - getAttitude());
+
+        if (experience < 1) {
             experience += 0.001;
-        if(skill < 1)
+        }
+        if (skill < 1) {
             skill += 0.001;
-        
+        }
+
         result /= 6.5;
-        
-        if(result < 0.5)
+
+        if (result < 0.5) {
             mistakes++;
-        
+        }
+
         decreaseFear();
-        
+
         currentWork += result;
     }
 }
