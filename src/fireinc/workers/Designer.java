@@ -32,7 +32,7 @@ public class Designer<E> extends Employee {
     }
 
     public void work() {
-        if (days >= 7) {
+        if (days% 7 ==0) {
             needsCoffee = true;
         }
         double result = 0;

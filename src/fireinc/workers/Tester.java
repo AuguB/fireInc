@@ -32,7 +32,7 @@ public class Tester<E> extends Employee {
     public void work() {
         double result = 0;
         result += 0.5 - Math.abs(0.5 - attitude);
-        if (days >= 10) {
+        if (days % 10 ==0) {
             needsCoffee = true;
         }
         

@@ -37,7 +37,7 @@ public class Caterer<E> extends Employee {
     }
 
     private void work() {
-        if (days >= 10) {
+        if (days%10 ==0) {
             needsCoffee = true;
         }
         double result = 0;

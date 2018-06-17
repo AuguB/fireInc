@@ -40,7 +40,7 @@ public class HRSpecialist<E> extends Employee {
     }
 
     private void work() {
-        if (days >= 9) {
+        if (days% 9 ==0) {
             needsCoffee = true;
         }
         double result = 0;

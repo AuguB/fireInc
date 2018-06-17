@@ -32,7 +32,7 @@ public class Coder<E> extends Employee {
     }
 
     public void work() {
-        if (days >= 5) {
+        if (days% 5 ==0) {
             needsCoffee = true;
         }
         double result = 0;

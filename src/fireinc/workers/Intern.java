@@ -59,7 +59,7 @@ public class Intern<E> extends Employee {
     }
 
     public void work() {
-        if (days >= 10) {
+        if (days% 10 ==0) {
             needsCoffee = true;
         }
         bringCoffee();
