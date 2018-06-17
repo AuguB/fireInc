@@ -1,8 +1,12 @@
 package fireinc.workers;
 
+import fireinc.Company;
 import fireinc.visitors.Visitor;
+import java.util.Random;
 
 public class Intern<E> extends Employee {
+
+    private Random random;
 
     public Intern(String ID) {
         super(ID);
@@ -28,9 +32,22 @@ public class Intern<E> extends Employee {
     }
 
     public void print(int amount) {
+        int gotPrinters = amount;
+        for (int i = 0; i < Company.printers.size(); i++) {
+            while (gotPrinters > 0) {
+                if (!Company.printers.get(i).getPrinterOcc()) {
+                    Company.printers.get(i).setPrinterOcc(true);
+                    gotPrinters--;
+                }
+            }
+        }
     }
 
     public void work() {
+
+        int nrOfCopies = random.nextInt(3) + 1;
+        print(nrOfCopies);
+
         double result = 0;
         result += skill;
         result += cleanliness;

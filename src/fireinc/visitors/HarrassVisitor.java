@@ -76,18 +76,45 @@ public class HarrassVisitor implements Visitor<Void> {
 
     @Override
     public Void visit(Manager m) {
+        m.setWorkethics(m.getWorkethics()-getNormalRand());
+        m.setCleanliness(m.getCleanliness()-getNormalRand());
+        m.setPunctuality(m.getPunctuality()-getNormalRand());
         m.setNeedsCoffee(true);
         return null;
     }
 
     @Override
     public Void visit(Intern i) {
+        i.setAttitude(i.getAttitude()+getNormalRand());
+        i.setCleanliness(i.getCleanliness()-getNormalRand());
+        i.setMistakes(i.getMistakes() + 1);
+        i.setPunctuality(i.getPunctuality()-getNormalRand());
         i.setNeedsCoffee(true);
         return null;
     }
 
     @Override
     public Void visit(Promotion p) {
+        return null;
+    }
+    
+        @Override
+    public Void visit(Caterer c) {
+        c.setAttitude(c.getAttitude()-getNormalRand());
+        c.setCleanliness(c.getCleanliness()-getNormalRand());
+        c.setWorkethics(c.getWorkethics()-getNormalRand());
+        c.setPunctuality(c.getPunctuality()-getNormalRand());
+        c.setKitchening(c.getKitchening()-getNormalRand());
+        c.setNeedsCoffee(true);
+        return null;
+    }
+
+    @Override
+    public Void visit(HRSpecialist h) {
+        h.setLoyalty(h.getLoyalty()-getNormalRand());
+        h.setSocial(h.getSocial()-getNormalRand());
+        h.setWorkethics(h.getWorkethics()-getNormalRand());
+        h.setNeedsCoffee(true);
         return null;
     }
 
@@ -97,14 +124,6 @@ public class HarrassVisitor implements Visitor<Void> {
                 /2;
     }
 
-    @Override
-    public Void visit(Caterer c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    @Override
-    public Void visit(HRSpecialist h) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }
