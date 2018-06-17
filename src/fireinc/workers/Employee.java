@@ -8,7 +8,7 @@ import fireinc.enums.Gender;
 import fireinc.visitors.Visitor;
 import static java.lang.Math.random;
 
-public class Employee<E> implements Runnable {
+public abstract class Employee<E> implements Runnable {
 
     protected String name;
     protected String ID;
@@ -22,7 +22,7 @@ public class Employee<E> implements Runnable {
     protected double workethics;
     protected double experience;
     protected double kitchening;
-    protected double workDone; 
+    protected double workDone;
     protected double attitude;
     protected int days;
     protected int mistakes;
@@ -60,15 +60,19 @@ public class Employee<E> implements Runnable {
     }
 
     private void makeRandomAttributes() {
-        this.setCleanliness(random());
-        this.experience = random();
-        this.kitchening = random();
-        this.looks = random();
-        this.setLoyalty(random());
-        this.setPunctuality(random());
-        this.setSkill(random());
-        this.setSocial(random());
-        this.setWorkethics(random());
+        this.cleanliness = randomNormal();
+        this.experience = randomNormal();
+        this.kitchening = randomNormal();
+        this.looks = randomNormal();
+        this.loyalty = randomNormal();
+        this.punctuality = randomNormal();
+        this.skill = randomNormal();
+        this.social = randomNormal();
+        this.workethics = randomNormal();
+    }
+
+    private double randomNormal() {
+        return (random() + random()) / 2;
     }
 
     public String getName() {
@@ -126,7 +130,7 @@ public class Employee<E> implements Runnable {
     public void YouAreFired() {
         fired = true;
     }
-    
+
     public boolean isNeedsCoffee() {
         return needsCoffee;
     }
@@ -158,7 +162,7 @@ public class Employee<E> implements Runnable {
     public void setWorkDone(double workDone) {
         this.workDone = workDone;
     }
-    
+
     public void setMistakes(int mistakes) {
         this.mistakes = mistakes;
     }
