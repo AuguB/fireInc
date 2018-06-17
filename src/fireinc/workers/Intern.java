@@ -9,6 +9,7 @@ import static fireinc.Settings.*;
 import static fireinc.Settings.*;
 
 import fireinc.visitors.Visitor;
+import java.util.ConcurrentModificationException;
 import java.util.Random;
 import java.util.concurrent.locks.Lock;
 
@@ -101,12 +102,15 @@ public class Intern<E> extends Employee {
     }
 
     private void bringCoffee() {
-        for (Division div : Company.divisions) {
-            for (Employee emp : div.getEmps()) {
-                if (emp.needsCoffee) {
-                    emp.needsCoffee = false;
+        try {
+            for (Division div : Company.divisions) {
+                for (Employee emp : div.getEmps()) {
+                    if (emp.needsCoffee) {
+                        emp.needsCoffee = false;
+                    }
                 }
             }
+        } catch (ConcurrentModificationException e) {
         }
     }
 

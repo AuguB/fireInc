@@ -43,10 +43,10 @@ public class Division implements Runnable {
         newThread.start();
         while (!closed) {
             if (manager.isFired()) {
-                String ID = (nrOfManagers++ + divID.getName());
+                String ID = (nrOfManagers++ + divID.getCode());
                 HiringStrategy hiring = divID.getHiring();
                 manager = new Manager(ID, hiring, this);
-                System.out.println(divID.getName() + " hired a new manager: " + manager);
+                System.out.println(divID.getCode() + " hired a new manager: " + manager);
                 newThread = new Thread(manager);
                 newThread.start();
             }
@@ -163,6 +163,15 @@ public class Division implements Runnable {
 
     @Override
     public String toString() {
+        lock.lock();
+        try {
+            return divID.getCode();
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public String getName() {
         lock.lock();
         try {
             return divID.getName();
