@@ -31,5 +31,6 @@ public class Settings {
     public static final int HR_TOLERABLE_MISTAKES = 5;
     public static final int PRO_TOLERABLE_MISTAKES = 10;
     
-    public static final int CAT_FIRE_THRESHOLD = 
+    public static final double EXP_GAIN = 0.0001;
+    public static final double SKILL_GAIN = 0.001;
 }
