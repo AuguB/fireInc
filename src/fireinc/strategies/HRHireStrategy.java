@@ -1,6 +1,7 @@
 package fireinc.strategies;
 
 import fireinc.enums.Gender;
+import static fireinc.Settings.*;
 import fireinc.workers.Employee;
 import static java.lang.Math.random;
 
@@ -19,7 +20,7 @@ public class HRHireStrategy implements HiringStrategy {
         sum += square(emp.getKitchening());
         sum += square(emp.getCleanliness());
         if (emp.getGender() == Gender.FEMALE) {
-            sum += 0.8;
+            sum += HR_FEMALE_PREFERENCE;
         }
         double length = Math.sqrt(sum);
         return (length > (managerThreshold * Math.sqrt(nrOfQualities)));
@@ -27,9 +28,7 @@ public class HRHireStrategy implements HiringStrategy {
 
     @Override
     public Employee getEmployee(int ID) {
-
         return new Employee(DivID + "-" + ID);
-
     }
 
 }

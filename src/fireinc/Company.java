@@ -1,7 +1,6 @@
 package fireinc;
 
-import fireinc.NameGenerator.NameGenerator;
-import fireinc.enums.Gender;
+import static fireinc.Settings.*;
 import fireinc.enums.Owner;
 import fireinc.strategies.CaterHireStrategy;
 import fireinc.strategies.FinanceHireStrategy;
@@ -12,62 +11,74 @@ import java.util.ArrayList;
 
 public class Company {
 
-    private NameGenerator names;
-
     private ArrayList<Division> divisions;
-
     private ArrayList<Owner> owners;
-
     private ArrayList<Printer> printers;
-
-    private String name;
+    private final String NAME;
 
     public Company(String name) {
-        this.names = new NameGenerator();
-        this.divisions = new ArrayList<>();
         setDivisions();
-        this.owners = new ArrayList<>();
-        this.printers = new ArrayList<>();
-        this.name = name;
+        setOwners();
+        setPrinters();
+        this.NAME = name;
     }
 
     private void setDivisions() {
+        this.divisions = new ArrayList<>();
         divisions.add(productionDivision());
         divisions.add(financeDivision());
         divisions.add(caterDivision());
         divisions.add(HRDivision());
     }
 
-    public String getName(Gender gen) {
-        return names.generateName(gen).toString();
-    }
-
     private Division productionDivision() {
-        Division div = new Division("Production", 50, 60);
+        Division div = new Division("Production", PRODMIN, PRODMAX);
         Manager man = new Manager("PROM1", new ProductionHireStrategy(), div);
         div.setManager(man);
         return div;
     }
 
     private Division financeDivision() {
-        Division div = new Division("Finance", 10, 18);
+        Division div = new Division("Finance", FINMIN, FINMAX);
         Manager man = new Manager("FINM1", new FinanceHireStrategy(), div);
         div.setManager(man);
         return div;
     }
 
     private Division caterDivision() {
-        Division div = new Division("Catering", 20, 25);
+        Division div = new Division("Catering", CATMIN, CATMAX);
         Manager man = new Manager("CATM1", new CaterHireStrategy(), div);
         div.setManager(man);
         return div;
     }
-    
+
     private Division HRDivision() {
-        Division div = new Division("Human Resources", 10, 15);
+        Division div = new Division("Human Resources", HRMIN, HRMAX);
         Manager man = new Manager("HRM1", new HRHireStrategy(), div);
         div.setManager(man);
         return div;
+    }
+
+    private void setOwners() {
+        this.owners = new ArrayList<>();
+        owners.add(Owner.RON);
+        owners.add(Owner.STIJN);
+        owners.add(Owner.MANTAS);
+    }
+
+    private void setPrinters() {
+        this.printers = new ArrayList<>();
+        for (int x = 0; x < NROFPRINTERS; x++) {
+
+        }
+    }
+
+    public String getName() {
+        return NAME;
+    }
+
+    public ArrayList<Printer> getPrinters() {
+        return printers;
     }
 
 }
