@@ -2,6 +2,7 @@ package fireinc.visitors;
 
 import fireinc.enums.Owner;
 import fireinc.workers.Accountant;
+import fireinc.workers.Caterer;
 import fireinc.workers.Coder;
 import fireinc.workers.promotions.CompanyCar;
 import fireinc.workers.Designer;
@@ -34,6 +35,8 @@ public interface Visitor<E> {
     public E visit(Intern i);
 
     public E visit(Promotion p);
+
+    public E visit(Caterer c);
 
     public default Owner getRandomOwner() {
         double select = random();
