@@ -1,27 +1,52 @@
 package fireinc;
 
 import fireinc.enums.DivisionIdentifier;
+import fireinc.strategies.HiringStrategy;
+import fireinc.visitors.FireVisitor;
 import fireinc.workers.Employee;
 import fireinc.workers.Manager;
 import java.util.ArrayList;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Division implements Runnable {
 
-    private DivisionIdentifier div;
+    private DivisionIdentifier divID;
+    private Lock lock;
     private int nrOfHiredEmps;
-
+    private int nrOfManagers;
     private ArrayList<Employee> employees;
 
-    private Employee manager;
+    private Manager manager;
 
     private double revenue;
 
     private boolean closed = false;
+    private double prevRev;
 
     public Division(DivisionIdentifier div) {
-        this.div = div;
+        lock = new ReentrantLock();
+        prevRev = 0;
+        revenue = 0;
+        this.nrOfManagers = 1;
+        this.divID = div;
         this.revenue = 0;
         this.nrOfHiredEmps = 0;
+    }
+
+    @Override
+    public void run() {
+        Thread thread = new Thread(manager);
+        thread.run();
+        while (!closed) {
+            if (manager.isFired()) {
+                String ID = (nrOfManagers++ + divID.getName());
+                HiringStrategy hiring = divID.getHiring();
+                manager = new Manager(ID, hiring, this);
+                System.out.println(divID.getName() + " hired a new manager: " + manager);
+            }
+            addRevenue(getRevenueFromEmployees());
+        }
     }
 
     public double getAverageWork() {
@@ -37,22 +62,14 @@ public class Division implements Runnable {
         this.manager = man;
     }
 
-    public double getRevenue() {
+    public double getRevenueFromEmployees() {
         double totalRev = 0;
         for (Employee emp : employees) {
             totalRev += emp.getCurrentWork();
         }
+        prevRev = revenue;
+        revenue = totalRev;
         return totalRev;
-    }
-
-    @Override
-    public void run() {
-
-        while (!closed) {
-            if (employees.size() < div.getMaximum()) {
-
-            }
-        }
     }
 
     public ArrayList<Employee> getEmps() {
@@ -60,16 +77,37 @@ public class Division implements Runnable {
     }
 
     public int getMax() {
-        return div.getMaximum();
+        return divID.getMaximum();
     }
 
     public int getMin() {
-        return div.getMinimum();
+        return divID.getMinimum();
     }
 
     public int getNextEmpNR() {
         nrOfHiredEmps++;
         return nrOfHiredEmps;
     }
-    
+
+
+
+    private void addRevenue(double revenueFromEmployees) {
+        lock.lock();
+        try {
+            revenue += revenueFromEmployees;
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public void accept(FireVisitor firing) {
+        for (Employee emp : employees) {
+            emp.accept(firing);
+        }
+    }
+
+    public double growth() {
+        return revenue / prevRev;
+    }
+
 }

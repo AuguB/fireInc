@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fireinc.workers;
 
+import static fireinc.Settings.*;
 import fireinc.visitors.Visitor;
-import static java.lang.Math.random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -46,7 +41,8 @@ public class Caterer<E> extends Employee {
             needsCoffee = true;
         }
         double result = 0;
-        result += random(); //mood factor
+        result += randomNormal(); //mood factor
+        result += 0.5 - Math.abs(0.5 - attitude);
         result += cleanliness;
         result += kitchening;
         result += social;
@@ -54,19 +50,19 @@ public class Caterer<E> extends Employee {
         result += experience;
         result += looks;
         if (experience < 1) {
-            experience += 0.0001;
+            experience += EXP_GAIN;
         }
         if (skill < 1) {
-            skill += 0.001;
+            skill += SKILL_GAIN;
         }
         if (needsCoffee) {
-            result -= 0.6;
+            result -= COFFEE_NEED;
         }
-        if (randomNormal() < 1 - experience) {
+        if (randomNormal() > getPrecision()) {
             mistakes += 1;
         }
         decreaseFear();
-        result = result / 7;
+        result = result / 7.5;
         currentWork += result;
     }
 }

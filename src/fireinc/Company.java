@@ -7,6 +7,7 @@ import fireinc.strategies.CaterHireStrategy;
 import fireinc.strategies.FinanceHireStrategy;
 import fireinc.strategies.HRHireStrategy;
 import fireinc.strategies.ProductionHireStrategy;
+import fireinc.visitors.FireVisitor;
 import fireinc.workers.Manager;
 import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
@@ -33,8 +34,13 @@ public class Company {
             Thread thread = new Thread(d);
             thread.start();
         }
-        while(true){
-            
+        while (true) {
+            for (Division d : divisions) {
+                if (d.growth() < 0.8) {
+                    FireVisitor firing = new FireVisitor();
+                    d.accept(firing);
+                }
+            }
         }
     }
 

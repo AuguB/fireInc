@@ -1,11 +1,13 @@
 package fireinc.workers;
 
 import fireinc.Company;
+
 import fireinc.Division;
+
+import static fireinc.Settings.*;
+
 import fireinc.visitors.Visitor;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Intern<E> extends Employee {
 
@@ -63,6 +65,8 @@ public class Intern<E> extends Employee {
         print(nrOfCopies);
 
         double result = 0;
+        result += randomNormal(); //mood factor
+        result += 0.5 - Math.abs(0.5 - getAttitude());
         result += skill;
         result += cleanliness;
         result += social;
@@ -70,12 +74,11 @@ public class Intern<E> extends Employee {
         result += experience;
         result += kitchening;
         result += looks;
-        result += 0.5 - Math.abs(0.5 - getAttitude());
-
         if (experience < 1) {
-            experience += 0.001;
+            experience += EXP_GAIN;
         }
         if (skill < 1) {
+
             skill += 0.001;
 
             result /= 7.5;
@@ -85,9 +88,20 @@ public class Intern<E> extends Employee {
             }
         }
         bringCoffee();
-        decreaseFear();
 
+        skill += SKILL_GAIN;
+
+        if (needsCoffee) {
+            result -= COFFEE_NEED;
+        }
+        if (randomNormal() > getPrecision()) {
+            mistakes += 1;
+        }
+
+        decreaseFear();
+        result = result / 8.5;
         currentWork += result;
+
     }
 
     private void bringCoffee() {
