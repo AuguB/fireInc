@@ -33,11 +33,10 @@ public class Accountant<E> extends Employee {
 
     public void work() {
         double result = 0;
-        result += 3 * random(); //mood factor
+        result += random(); //mood factor
         result += skill;
         result += punctuality;
         result += loyalty;
-        result -= Math.abs(0.5 - attitude);
         result += experience;
         if (experience < 1) {
             experience += 0.0001;
@@ -48,13 +47,14 @@ public class Accountant<E> extends Employee {
         if (needsCoffee) {
             result -= 0.6;
         }
-        if (random() < 1 - skill/experience) {
+        if (randomNormal() < 1 - skill / experience) {
             mistakes += 1;
         }
+        result = result / 5;
+        currentWork += result;
     }
 
-    public void YouAreFired() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
+    
+    
 }
-
