@@ -14,6 +14,9 @@ import fireinc.workers.Manager;
 import fireinc.workers.promotions.Raise;
 import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Company {
 
@@ -26,13 +29,13 @@ public class Company {
     private static double revenue;
 
     public Company(String name) {
+        lock = new ReentrantLock();
         NAME = name;
         revenue = 0;
         cycles = 0;
         setOwners();
         setDivisions();
         setPrinters();
-
     }
 
     public void start() {
@@ -41,29 +44,51 @@ public class Company {
             thread.start();
         }
         while (true) {
-            cycles++;
+            lock.lock();
+            try {
+                cycles++;
+            } finally {
+                lock.unlock();
+            }
             if (cycles % COMPANY_CYCLES == 0) {
                 for (Division d : divisions) {
-                    if (d.growth() < 0.8) {
-                        System.out.println(d.getMan().getDiv() +
-                                " did very poorly this quater, fucking manager " +
-                                d.getMan().getName() + "got his ass fired by "
+                    d.addRevenue(d.getRevenueFromEmployees());
+                    if (d.growth() < 0.5) {
+                        System.out.println(d.getMan().getDiv()
+                                + " did very poorly this quater, fucking manager "
+                                + d.getMan().getName() + " got his ass fired by "
                                 + getRandomOwner() + "!");
                         d.getMan().YouAreFired();
-                    } else if (d.growth() < 0.95) {
-                        System.out.println(d.getMan().getDiv() +
-                                " did poorly, so the firing season is starting!");
-                        FireVisitor firing = new FireVisitor();
-                        for (Employee emp : d.getEmps()) {
-                            emp.accept(firing);
-                        }
-                    } else if (d.growth() > 1.2) {
+                    } else if (d.growth() < 1) {
+//                    } else if (true) {
+                        fireSequence(d);
+                    } else if (d.growth() > 2) {
                         System.out.println("Good news! " + d.getMan().getDiv() + " did very well, so promotion season starts!");
                         promotionRound(d);
                     }
                 }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Company.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
+    }
+
+    private void fireSequence(Division d) {
+        //for testing purposes only
+        System.out.println(d.getMan().getDiv()
+                + " did poorly, so the firing season is starting!");
+        FireVisitor firing = new FireVisitor();
+        ArrayList<Employee> fired = new ArrayList<>();
+        for (Employee emp : d.getEmps()) {
+            emp.accept(firing);
+            if (emp.isFired()) {
+                fired.add(emp);
+            }
+        }
+        d.getEmps().removeAll(fired);
     }
 
     private void setDivisions() {
@@ -148,6 +173,7 @@ public class Company {
             if ((Boolean) emp.accept(prom)) {
                 if (emp.hasCar()) {
                     if (emp.hasOffice()) {
+                        emp.YouAreFired();
                         d.getEmps().remove(emp);
                         emp = new Raise(emp.getID(), emp);
                         d.getEmps().add(emp);

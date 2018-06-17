@@ -6,6 +6,7 @@ import fireinc.visitors.FireVisitor;
 import fireinc.workers.Employee;
 import fireinc.workers.Manager;
 import java.util.ArrayList;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -19,10 +20,10 @@ public class Division implements Runnable {
 
     private Manager manager;
 
-    private double revenue;
+    private volatile double revenue;
 
     private boolean closed;
-    private double prevRev;
+    private volatile double prevRev;
 
     public Division(DivisionIdentifier div) {
         closed = false;
@@ -38,8 +39,6 @@ public class Division implements Runnable {
 
     @Override
     public void run() {
-        Thread thread = new Thread(manager);
-        thread.start();
         Thread newThread = new Thread(manager);
         newThread.start();
         while (!closed) {
@@ -51,7 +50,6 @@ public class Division implements Runnable {
                 newThread = new Thread(manager);
                 newThread.start();
             }
-            addRevenue(getRevenueFromEmployees());
 //            System.out.println(revenue+" made by "+divID.getName());
         }
     }
@@ -60,9 +58,7 @@ public class Division implements Runnable {
         lock.lock();
         try {
             double sum = 0;
-            for (Employee e : employees) {
-                sum += (e.getCurrentWork() + e.getWorkDone());
-            }
+            sum = employees.stream().map((e) -> (e.getCurrentWork() + e.getWorkDone())).reduce(sum, (accumulator, _item) -> accumulator + _item);
             sum = sum / employees.size();
             return sum;
         } finally {
@@ -83,8 +79,11 @@ public class Division implements Runnable {
         lock.lock();
         try {
             double totalRev = 0;
-            for (Employee emp : employees) {
-                totalRev += emp.getCurrentWork();
+            for (int x = 0; x < employees.size(); x++) {
+                try {
+                    totalRev += employees.get(x).getCurrentWork();
+                } catch (NullPointerException e) {
+                }
             }
             prevRev = revenue;
             revenue = totalRev;
@@ -131,7 +130,7 @@ public class Division implements Runnable {
         }
     }
 
-    private void addRevenue(double revenueFromEmployees) {
+    public void addRevenue(double revenueFromEmployees) {
         lock.lock();
         try {
             revenue += revenueFromEmployees;
@@ -143,7 +142,11 @@ public class Division implements Runnable {
     public double growth() {
         lock.lock();
         try {
-            return revenue / prevRev;
+            double growth = revenue / prevRev;
+//            System.out.println(revenue + "Revenue");
+//            System.out.println(prevRev + "Previously");
+//            System.out.println(growth);
+            return growth;
         } finally {
             lock.unlock();
         }

@@ -13,8 +13,6 @@ import java.util.logging.Logger;
  * @param <E>
  */
 public class Caterer<E> extends Employee {
-    
-
 
     public Caterer(String ID) {
         super(ID);
@@ -23,7 +21,7 @@ public class Caterer<E> extends Employee {
     @Override
     public void run() {
         while (!fired) {
-            days++;
+            incrementDays();
             try {
                 work();
                 Thread.sleep(300); //lunchbreak
@@ -40,40 +38,35 @@ public class Caterer<E> extends Employee {
         return (E) v.visit(this);
     }
 
-    private void work() {
-        lock.lock();
-        try {
-            if (days%10 ==0) {
-                needsCoffee = true;
-            }
-            double result = 0;
-            result += randomNormal(); //mood factor
-            result += 0.5 - Math.abs(0.5 - attitude);
-            result += cleanliness;
-            result += kitchening;
-            result += social;
-            result += workethics;
-            result += experience;
-            result += looks;
-            if (experience < 1) {
-                experience += EXP_GAIN;
-            }
-            if (skill < 1) {
-                skill += SKILL_GAIN;
-            }
-            if (needsCoffee) {
-                
-                result -= COFFEE_NEED_PENALTY;
-                
-            }
-            if (randomNormal() > getPrecision()) {
-                mistakes += 1;
-            }
-            decreaseFear();
-            result = result / 7.5;
-            currentWork += result;
-        } finally {
-            lock.unlock();
+    @Override
+    public void work() {
+        if (days % 10 == 0) {
+            setNeedsCoffee(true);
         }
+        double result = 0;
+        result += randomNormal(); //mood factor
+        result += 0.5 - Math.abs(0.5 - getAttitude());
+        result += getCleanliness();
+        result += getKitchening();
+        result += getSocial();
+        result += getWorkethics();
+        result += getExperience();
+        result += getLooks();
+        if (experience < 1) {
+            addExp(EXP_GAIN);
+        }
+        if (skill < 1) {
+            addSkill(SKILL_GAIN);
+        }
+        if (needsCoffee) {
+            result -= COFFEE_NEED_PENALTY;
+        }
+        if (randomNormal() > getPrecision()) {
+            incrementMistakes(1);
+        }
+        decreaseFear();
+        result = result / 7.5;
+        addCurrentWork(result);
+
     }
 }

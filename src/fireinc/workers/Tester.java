@@ -9,14 +9,13 @@ import java.util.logging.Logger;
 
 public class Tester<E> extends Employee {
 
-
     public Tester(String ID) {
         super(ID);
     }
 
     public void run() {
         while (!fired) {
-            days++;
+            incrementDays();
             try {
                 work();
                 Thread.sleep(500);
@@ -33,37 +32,33 @@ public class Tester<E> extends Employee {
     }
 
     public void work() {
-        lock.lock();
-        try {
-            double result = 0;
-            result += 0.5 - Math.abs(0.5 - attitude);
-            if (days % 10 ==0) {
-                needsCoffee = true;
-            }
-            
-            result += skill;
-            result += punctuality;
-            result += cleanliness;
-            result += loyalty;
-            result += workethics;
-            if (experience < 1) {
-                experience += EXP_GAIN;
-            }
-            if (skill < 1) {
-                skill += SKILL_GAIN;
-            }
-            if (needsCoffee) {
-                
-                result -= COFFEE_NEED_PENALTY;
-                
-            }
-            if (randomNormal() > getPrecision()) {
-                mistakes++;
-            }
-            result = result / 5.5;
-            currentWork += result;
-        } finally {
-            lock.unlock();
+
+        double result = 0;
+        result += 0.5 - Math.abs(0.5 - getAttitude());
+        if (days % 10 == 0) {
+            setNeedsCoffee(true);
         }
+
+        result += getSkill();
+        result += getPunctuality();
+        result += getCleanliness();
+        result += getLoyalty();
+        result += getWorkethics();
+        if (experience < 1) {addExp(EXP_GAIN);
+        }
+        if (skill < 1) {
+            addSkill(SKILL_GAIN);
+        }
+        if (needsCoffee) {
+
+            result -= COFFEE_NEED_PENALTY;
+
+        }
+        if (randomNormal() > getPrecision()) {
+            incrementMistakes(1);
+        }
+        result = result / 5.5;
+        addCurrentWork(result);
+
     }
 }

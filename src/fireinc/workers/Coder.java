@@ -9,16 +9,14 @@ import java.util.logging.Logger;
 
 public class Coder<E> extends Employee {
     
-
-
     public Coder(String ID) {
         super(ID);
     }
-
+    
     @Override
     public void run() {
         while (!fired) {
-            days++;
+            incrementDays();
             try {
                 work();
                 Thread.sleep(300); //lunchbreak
@@ -29,44 +27,41 @@ public class Coder<E> extends Employee {
             }
         }
     }
-
+    
     @Override
     public E accept(Visitor v) {
         return (E) v.visit(this);
     }
-
+    
     public void work() {
-        lock.lock();
-        try {
-            if (days% 5 ==0) {
-                needsCoffee = true;
-            }
-            double result = 0;
-            result += randomNormal(); //mood factor
-            result += 0.5 - Math.abs(0.5 - attitude);
-            result += skill;
-            result += punctuality;
-            result += workethics;
-            result += experience;
-            if (experience < 1) {
-                experience += EXP_GAIN;
-            }
-            if (skill < 1) {
-                skill += SKILL_GAIN;
-            }
-            if (needsCoffee) {
-                
-                result -= COFFEE_NEED_PENALTY;
-                
-            }
-            if (randomNormal() > getPrecision()) {
-                mistakes += 1;
-            }
-            decreaseFear();
-            result = result / 5.5;
-            currentWork += result;
-        } finally {
-            lock.unlock();
+        
+        if (days % 5 == 0) {
+            setNeedsCoffee(true);
         }
+        double result = 0;
+        result += randomNormal(); //mood factor
+        result += 0.5 - Math.abs(0.5 - getAttitude());
+        result += getSkill();
+        result += getPunctuality();
+        result += getWorkethics();
+        result += getExperience();
+        if (experience < 1) {
+            addExp(EXP_GAIN);
+        }
+        
+        if (skill < 1) {
+            addSkill(SKILL_GAIN);
+        }
+        if (needsCoffee) {
+            
+            result -= COFFEE_NEED_PENALTY;
+            
+        }
+        if (randomNormal() > getPrecision()) {
+            incrementMistakes(1);
+        }
+        decreaseFear();
+        result = result / 5.5;
+        addCurrentWork(result);
     }
 }

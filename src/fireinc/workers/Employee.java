@@ -63,6 +63,19 @@ public abstract class Employee<E> implements Runnable {
         }
     }
 
+    protected void addCurrentWork(double work) {
+        currentWork += work;
+    }
+
+    public void incrementDays() {
+        lock.lock();
+        try {
+            days++;
+        } finally {
+            lock.unlock();
+        }
+    }
+
     public void increaseAttemptsToFire() {
         lock.lock();
         try {
@@ -102,7 +115,7 @@ public abstract class Employee<E> implements Runnable {
         }
     }
 
-    public void run() {
+    public void work() {
     }
 
     public double getAverageWork() {
@@ -397,6 +410,28 @@ public abstract class Employee<E> implements Runnable {
         lock.lock();
         try {
             return (skill + experience) / 2;
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    protected void addSkill(double SKILL_GAIN) {
+        lock.lock();
+        try {
+            skill += SKILL_GAIN;
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    protected void incrementMistakes(int i) {
+        mistakes += i;
+    }
+
+    protected void addExp(double EXP_GAIN) {
+        lock.lock();
+        try {
+            experience += EXP_GAIN;
         } finally {
             lock.unlock();
         }

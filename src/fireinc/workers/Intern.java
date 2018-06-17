@@ -2,7 +2,6 @@ package fireinc.workers;
 
 import fireinc.Company;
 
-
 import fireinc.Division;
 
 import static fireinc.Settings.*;
@@ -17,15 +16,15 @@ public class Intern<E> extends Employee {
 
     private Random random;
 
-
     public Intern(String ID) {
         super(ID);
+        random = new Random();
     }
 
     @Override
     public void run() {
         while (!fired) {
-            days++;
+            incrementDays();
             try {
                 work();
                 Thread.sleep(200); //lunchbreak
@@ -61,62 +60,44 @@ public class Intern<E> extends Employee {
     }
 
     public void work() {
-        lock.lock();
-        try {
-            if (days% 10 ==0) {
-                needsCoffee = true;
-            }
-            bringCoffee();
-            
-            int nrOfCopies = random.nextInt(3) + 1;
-            print(nrOfCopies);
-            
-            double result = 0;
-            result += randomNormal(); //mood factor
-            result += 0.5 - Math.abs(0.5 - getAttitude());
-            result += skill;
-            result += cleanliness;
-            result += social;
-            result += loyalty;
-            result += experience;
-            result += kitchening;
-            result += looks;
-            if (experience < 1) {
-                experience += EXP_GAIN;
-            }
-            if (skill < 1) {
-                
-                
-                skill += 0.001;
-                
-                result /= 7.5;
-                
-                if (result < 0.5) {
-                    mistakes++;
-                }
-            }
-            bringCoffee();
-            
-            skill += SKILL_GAIN;
 
-            if (randomNormal() > getPrecision()) {
-                mistakes += 1;
-                
-                skill += SKILL_GAIN;
-                
-            }
-            if (needsCoffee) {
-                result -= COFFEE_NEED_PENALTY;
-            }
-            if (randomNormal() > getPrecision()) {
-                mistakes += 1;
-            }
-            decreaseFear();
-            result = result / 8.5;
-            currentWork += result;
-        } finally {
-            lock.unlock();
+        if (days % 10 == 0) {
+            setNeedsCoffee(true);
         }
+        bringCoffee();
+
+        int nrOfCopies = random.nextInt(3) + 1;
+        print(nrOfCopies);
+
+        double result = 0;
+        result += randomNormal(); //mood factor
+        result += 0.5 - Math.abs(0.5 - getAttitude());
+        result += getSkill();
+        result += getCleanliness();
+        result += getSocial();
+        result += getLoyalty();
+        result += getExperience();
+        result += getKitchening();
+        result += getLooks();
+        if (experience < 1) {
+            addExp(EXP_GAIN);
+        }
+        if (skill < 1) {
+            addSkill(SKILL_GAIN);
+        }
+
+        if (result < 0.5) {
+            incrementMistakes(1);
+        }
+        bringCoffee();
+
+        if (needsCoffee) {
+            result -= COFFEE_NEED_PENALTY;
+        }
+
+        decreaseFear();
+        result = result / 8.5;
+        addCurrentWork(result);
     }
 
     private void bringCoffee() {

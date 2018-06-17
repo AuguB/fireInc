@@ -4,14 +4,11 @@ import static fireinc.Settings.*;
 import fireinc.Division;
 import fireinc.strategies.HiringStrategy;
 import fireinc.visitors.Visitor;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class Manager<E> extends Employee {
 
-    private HiringStrategy hiring;
-    private Division div;
-
+    private final HiringStrategy hiring;
+    private final Division div;
 
     public Manager(String ID, HiringStrategy hiring, Division div) {
         super(ID);
@@ -19,9 +16,10 @@ public class Manager<E> extends Employee {
         this.div = div;
     }
 
+    @Override
     public void run() {
         while (!fired) {
-            days++;
+            incrementDays();
             try {
                 work();
                 Thread.sleep(200); //lunchbreak
@@ -34,6 +32,12 @@ public class Manager<E> extends Employee {
         }
     }
 
+    /**
+     *
+     * @param v
+     * @return
+     */
+    @Override
     public E accept(Visitor v) {
         return (E) v.visit(this);
     }
@@ -41,44 +45,39 @@ public class Manager<E> extends Employee {
     public Division getDiv() {
         lock.lock();
         try {
-        return div;
+            return div;
         } finally {
             lock.unlock();
         }
     }
 
     public void work() {
-        lock.lock();
-        try {
-            if (days%5 == 0) {
-                needsCoffee = true;
-            }
-            
-            produceResult();
-            hireNewPeople();
-        } finally {
-            lock.unlock();
+
+        if (days % 5 == 0) {
+            setNeedsCoffee(true);
         }
+        produceResult();
+        hireNewPeople();
+
     }
 
-    
-
     private void produceResult() {
+
         hireNewPeople();
         double result = 0;
         result += 0.5 - Math.abs(0.5 - getAttitude());
-        result += skill;
-        result += experience;
-        result += workethics;
-        result += loyalty;
-        result += looks;
-        result += punctuality;
+        result += getSkill();
+        result += getExperience();
+        result += getWorkethics();
+        result += getLoyalty();
+        result += getLooks();
+        result += getPunctuality();
 
         if (experience < 1) {
-            experience += EXP_GAIN;
+            addExp(EXP_GAIN);
         }
         if (skill < 1) {
-            skill += SKILL_GAIN;
+            addSkill(SKILL_GAIN);
         }
         if (needsCoffee) {
 
@@ -86,19 +85,20 @@ public class Manager<E> extends Employee {
 
         }
         if (randomNormal() > getPrecision()) {
-            mistakes++;
+            incrementMistakes(1);
         }
         decreaseFear();
         result = result / 6.5;
-        currentWork += result;
+        addCurrentWork(result);
     }
 
     private void hireNewPeople() {
         if (div.getEmps().size() < div.getMax()) {
-            Employee newEmp = hiring.hire(div.getNextEmpNR(), skill);
+            Employee newEmp = hiring.hire(div.getNextEmpNR(), getSkill());
             div.getEmps().add(newEmp);
             System.out.println(div + " hired: " + newEmp);
-
+            Thread thread = new Thread(newEmp);
+            thread.start();
         }
     }
 }
