@@ -73,8 +73,6 @@ public class Division implements Runnable {
     }
     
     public double getGrowth() {
-        
+        return 0;
     }
-    
-    
 }
