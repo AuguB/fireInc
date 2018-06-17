@@ -1,6 +1,6 @@
 package fireinc.workers;
 
-import fireinc.Company;
+import static fireinc.Settings.*;
 import fireinc.Division;
 import fireinc.strategies.HiringStrategy;
 import fireinc.visitors.Visitor;
@@ -41,25 +41,28 @@ public class Manager<E> extends Employee {
 
     public void work() {
         double result = 0;
+        result += 0.5 - Math.abs(0.5 - getAttitude());
         result += skill;
         result += experience;
         result += workethics;
         result += loyalty;
         result += looks;
         result += punctuality;
-        result += 0.5 - Math.abs(0.5 - getAttitude());
 
         if (experience < 1) {
-            experience += 0.001;
+            experience += EXP_GAIN;
         }
         if (skill < 1) {
-            skill += 0.001;
+            skill += SKILL_GAIN;
         }
-        result /= 6.5;
-        if (result < 0.5) {
+        if (needsCoffee) {
+            result -= COFFEE_NEED;
+        }
+        if (randomNormal() > getPrecision()) {
             mistakes++;
         }
         decreaseFear();
+        result = result / 6.5;
         currentWork += result;
 
         if (div.getEmps().size() < div.getMax()) {

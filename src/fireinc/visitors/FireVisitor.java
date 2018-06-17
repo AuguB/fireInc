@@ -17,10 +17,9 @@ import fireinc.workers.promotions.Raise;
 import fireinc.workers.Tester;
 
 public class FireVisitor implements Visitor<Void> {
-    
+
     @Override
     public Void visit(Accountant a) {
-        boolean fired = false;
         if (a.getAverageWork() < MIN_RESULTS || FIN_TOLERABLE_MISTAKES <= a.getMistakes()) {
             if (!persuade(a)) {
                 fire(a);
@@ -33,7 +32,6 @@ public class FireVisitor implements Visitor<Void> {
 
     @Override
     public Void visit(Coder c) {
-        boolean fired = false;
         if (c.getAverageWork() < MIN_RESULTS || PRO_TOLERABLE_MISTAKES <= c.getMistakes()) {
             if (!persuade(c)) {
                 fire(c);
@@ -46,7 +44,6 @@ public class FireVisitor implements Visitor<Void> {
 
     @Override
     public Void visit(Tester t) {
-        boolean fired = false;
         if (t.getAverageWork() < MIN_RESULTS || PRO_TOLERABLE_MISTAKES <= t.getMistakes()) {
             if (!persuade(t)) {
                 fire(t);
@@ -59,7 +56,6 @@ public class FireVisitor implements Visitor<Void> {
 
     @Override
     public Void visit(Designer d) {
-        boolean fired = false;
         if (d.getAverageWork() < MIN_RESULTS || PRO_TOLERABLE_MISTAKES <= d.getMistakes()) {
             if (!persuade(d)) {
                 fire(d);
@@ -67,6 +63,44 @@ public class FireVisitor implements Visitor<Void> {
                 d.increaseAttemptsToFire();
             }
         }
+        return null;
+    }
+
+    @Override
+    public Void visit(Caterer c) {
+
+        if (c.getAverageWork() < MIN_RESULTS || CAT_TOLERABLE_MISTAKES <= c.getMistakes()) {
+            if (!persuade(c)) {
+                fire(c);
+            } else {
+                c.increaseAttemptsToFire();
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Void visit(HRSpecialist h) {
+
+        if (h.getAverageWork() < MIN_RESULTS || HR_TOLERABLE_MISTAKES <= h.getMistakes()) {
+            if (!persuade(h)) {
+                fire(h);
+            } else {
+                h.increaseAttemptsToFire();
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Void visit(Manager m) {
+        fire(m);
+        return null;
+    }
+
+    @Override
+    public Void visit(Intern i) {
+        fire(i);
         return null;
     }
 
@@ -89,56 +123,14 @@ public class FireVisitor implements Visitor<Void> {
     }
 
     @Override
-    public Void visit(Manager m) {
-        fire(m);
-        return null;
-    }
-
-    @Override
-    public Void visit(Intern i) {
-        fire(i);
-        return null;
-    }
-
-    @Override
     public Void visit(Promotion p) {
         p.getEmp().accept(this);
         return null;
     }
 
-    @Override
-    public Void visit(Caterer c) {
-        boolean fired = false;
-        if (c.getAverageWork() < MIN_RESULTS || CAT_TOLERABLE_MISTAKES <= c.getMistakes()) {
-            if (!persuade(c)) {
-                fire(c);
-            } else {
-                c.increaseAttemptsToFire();
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public Void visit(HRSpecialist h) {
-        boolean fired = false;
-        if (h.getAverageWork() < MIN_RESULTS || HR_TOLERABLE_MISTAKES <= h.getMistakes()) {
-            if (!persuade(h)) {
-                fire(h);
-            } else {
-                h.increaseAttemptsToFire();
-            }
-        }
-        return null;
-    }
-
-    private void fire(Employee e) {
-        e.YouAreFired();
-        System.out.println(this.getRandomOwner() + " has fired " + e.getName());
-    }
-
     /**
      * Employee tries to persuade to not get fired
+     *
      * @return true/false for fired
      */
     private boolean persuade(Employee emp) {
@@ -161,7 +153,7 @@ public class FireVisitor implements Visitor<Void> {
                 score += 0.5;
                 if (ANCIENT_WORKER <= emp.getDays()) {
                     score += 0.5;
-                    if (LEGENDARY_WORKER <= emp.getDays()){
+                    if (LEGENDARY_WORKER <= emp.getDays()) {
                         score += 0.5;
                     }
                 }
@@ -169,7 +161,12 @@ public class FireVisitor implements Visitor<Void> {
         }
         score -= emp.getAttemptsToFire() * 0.25;
         score -= Math.abs(MIN_RESULTS - emp.getAverageWork()) * 3;
-        
+
         return score < 3;
+    }
+
+    private void fire(Employee e) {
+        e.YouAreFired();
+        System.out.println(this.getRandomOwner() + " has fired " + e.getName());
     }
 }

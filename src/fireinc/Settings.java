@@ -27,17 +27,14 @@ public class Settings {
     public static final int FIN_TOLERABLE_MISTAKES = 2;
     public static final int HR_TOLERABLE_MISTAKES = 5;
     public static final int PRO_TOLERABLE_MISTAKES = 10;
-
+    public static final int INTERN_TOLERABLE_MISTAKES = 20;
     public static final int MAN_TOLERABLE_MISTAKES = 7;
 
-    public static final double EXP_GAIN = 0.0001;
-    public static final double SKILL_GAIN = 0.001;
-
-    public static final int INTERN_TOLERABLE_MISTAKES = 20;
-
+    public static final double EXP_GAIN = 0.0002;
+    public static final double SKILL_GAIN = 0.0005;
     
     public static final double MIN_RESULTS = 0.9;
-
+    public static final double COFFEE_NEED = 0.2;
     
     public static final double HARD_WORK = 1.2;
     public static final double GOOD_LOOKS = 0.7;
