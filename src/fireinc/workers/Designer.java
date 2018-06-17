@@ -9,7 +9,10 @@ public class Designer<E> extends Employee {
     }
 
     public void run() {
-        
+        while(!fired) {
+            work();
+            
+        }
     }
 
     public E accept(Visitor v){

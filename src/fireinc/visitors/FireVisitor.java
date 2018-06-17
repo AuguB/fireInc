@@ -16,6 +16,7 @@ public class FireVisitor implements Visitor<Void> {
 
     @Override
     public Void visit(Accountant a) {
+        double score = 
         fire(a);
         return null;
     }
