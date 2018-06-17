@@ -1,5 +1,6 @@
 package fireinc.visitors;
 
+import fireinc.enums.Gender;
 import fireinc.workers.Accountant;
 import fireinc.workers.Caterer;
 import fireinc.workers.Coder;
@@ -13,12 +14,28 @@ import fireinc.workers.promotions.Promotion;
 import fireinc.workers.promotions.Raise;
 import fireinc.workers.Tester;
 
-
-public class PromotionVisitor implements Visitor<Boolean>{
+public class PromotionVisitor implements Visitor<Boolean> {
 
     @Override
     public Boolean visit(Accountant a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        double points = 0;
+        double average = a.getWorkDone() / a.getDays();
+        if (average > 0.9) {
+            points += 1;
+        }
+        if (a.getMistakes() <= 3) {
+            points += 1;
+        }
+        if (a.getGender() == Gender.FEMALE) {
+            if (a.getLooks() > 0.8) {
+                points += 1;
+            }
+        } else {
+            if (a.getSocial() > 0.8) {
+                points += 1;
+            }
+        }
+        return points >= 2;
     }
 
     @Override
@@ -38,17 +55,17 @@ public class PromotionVisitor implements Visitor<Boolean>{
 
     @Override
     public Boolean visit(Raise r) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (Boolean) r.getEmp().accept(this);
     }
 
     @Override
     public Boolean visit(CompanyCar c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (Boolean) c.getEmp().accept(this);
     }
 
     @Override
     public Boolean visit(OwnOffice o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (Boolean) o.getEmp().accept(this);
     }
 
     @Override
@@ -63,12 +80,12 @@ public class PromotionVisitor implements Visitor<Boolean>{
 
     @Override
     public Boolean visit(Promotion p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (Boolean) p.getEmp().accept(this);
     }
 
     @Override
     public Boolean visit(Caterer c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
@@ -76,5 +93,4 @@ public class PromotionVisitor implements Visitor<Boolean>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-   
 }
