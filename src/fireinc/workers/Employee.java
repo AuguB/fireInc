@@ -8,7 +8,7 @@ import fireinc.enums.Gender;
 import fireinc.visitors.Visitor;
 import static java.lang.Math.random;
 
-public class Employee<E> implements Runnable {
+public abstract class Employee<E> implements Runnable {
 
     protected String name;
     protected String ID;
