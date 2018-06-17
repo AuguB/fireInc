@@ -38,7 +38,8 @@ public class Intern<E> extends Employee {
                += loyalty
                += experience 
                += kitchening
-               += 2*looks;
+               += looks
+               += 0.5-Math.abs(0.5-attitude);
         
         if(experience < 1)
             experience += 0.01;
@@ -46,6 +47,8 @@ public class Intern<E> extends Employee {
             skill += 0.01;
         if(result < 0.6)
             mistakes++;
+        
+        result/=8.5;
         
         
         
