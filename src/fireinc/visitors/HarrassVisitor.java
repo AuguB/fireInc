@@ -22,58 +22,66 @@ public class HarrassVisitor implements Visitor<Void> {
 
     @Override
     public Void visit(Accountant a) {
-        a.setPunctuality(a.getPunctuality() - getRand());
+        a.setPunctuality(a.getPunctuality() - getNormalRand());
+        
         a.setNeedsCoffee(true);
         return null;
     }
 
     @Override
     public Void visit(Coder c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        c.setNeedsCoffee(true);
+        return null;
     }
 
     @Override
     public Void visit(Tester t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        t.setNeedsCoffee(true);
+        return null;
     }
 
     @Override
     public Void visit(Designer d) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        d.setNeedsCoffee(true);
+        return null;
     }
 
     @Override
     public Void visit(Raise r) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
     public Void visit(CompanyCar c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
     public Void visit(OwnOffice o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
     public Void visit(Manager m) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        m.setNeedsCoffee(true);
+        return null;
     }
 
     @Override
     public Void visit(Intern i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        i.setNeedsCoffee(true);
+        return null;
     }
 
     @Override
     public Void visit(Promotion p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
-    private double getRand() {
-        return random.nextDouble() * (0.3 - 0.1) + 0.1;
+    private double getNormalRand() {
+        return ((random.nextDouble() * (0.12 - 0.01) + 0.01) 
+                + (random.nextDouble() * (0.12 - 0.01) + 0.01)) 
+                /2;
     }
 
 }
