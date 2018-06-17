@@ -1,7 +1,9 @@
 package fireinc.strategies;
 
 import fireinc.enums.Gender;
+import fireinc.workers.Caterer;
 import fireinc.workers.Employee;
+import fireinc.workers.Intern;
 import static java.lang.Math.random;
 
 public class CaterHireStrategy implements HiringStrategy {
@@ -27,7 +29,12 @@ public class CaterHireStrategy implements HiringStrategy {
 
     @Override
     public Employee getEmployee(int ID) {
-        return new Employee(DivID + "-" + ID);
+        double randomEmp = random();
+        if (randomEmp > 0.8) {
+            return new Caterer(DivID + "-" + ID);
+        } else {
+            return new Intern(DivID + "-" + ID);
+        }
     }
 
 }

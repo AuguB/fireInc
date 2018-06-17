@@ -31,8 +31,14 @@ public abstract class Employee<E> implements Runnable {
     protected boolean needsCoffee;
 
     public Employee(String ID) {
+        this(ID, 0.5);
+    }
+
+    public Employee(String ID, double preference) {
         this.ID = ID;
-        if (random() > 0.5) {
+        if (random() > preference) {
+            this.gender = Gender.MALE;
+        } else {
             this.gender = Gender.FEMALE;
         }
         this.name = generateName(gender).toString();

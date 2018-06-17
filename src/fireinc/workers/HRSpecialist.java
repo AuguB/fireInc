@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package fireinc.workers;
 
 import fireinc.visitors.Visitor;
@@ -5,10 +10,18 @@ import static java.lang.Math.random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Accountant<E> extends Employee {
+/**
+ *
+ * @author guus
+ */
+public class HRSpecialist<E> extends Employee {
 
-    public Accountant(String ID) {
+    public HRSpecialist(String ID) {
         super(ID);
+    }
+
+    public HRSpecialist(String ID, double pref) {
+        super(ID, pref);
     }
 
     @Override
@@ -31,13 +44,15 @@ public class Accountant<E> extends Employee {
         return (E) v.visit(this);
     }
 
-    public void work() {
+    private void work() {
         double result = 0;
         result += random(); //mood factor
-        result += skill;
-        result += punctuality;
-        result += loyalty;
+        result += cleanliness;
+        result += kitchening;
+        result += social;
+        result += workethics;
         result += experience;
+        result += looks;
         if (experience < 1) {
             experience += 0.0001;
         }
@@ -50,11 +65,8 @@ public class Accountant<E> extends Employee {
         if (randomNormal() < 1 - experience) {
             mistakes += 1;
         }
-        result = result / 5;
+        result = result / 7;
         currentWork += result;
     }
 
-
-    
-    
 }

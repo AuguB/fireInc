@@ -1,7 +1,10 @@
 package fireinc.strategies;
 
 import fireinc.workers.Coder;
+import fireinc.workers.Designer;
 import fireinc.workers.Employee;
+import fireinc.workers.Intern;
+import fireinc.workers.Tester;
 import static java.lang.Math.random;
 
 public class ProductionHireStrategy implements HiringStrategy {
@@ -23,6 +26,15 @@ public class ProductionHireStrategy implements HiringStrategy {
 
     @Override
     public Employee getEmployee(int ID) {
-        return new Employee(DivID + "-" + ID);
+        double randomEmp = random();
+        if (randomEmp < 0.32) {
+            return new Tester(DivID + "-" + ID);
+        } else if (randomEmp < 0.64) {
+            return new Coder(DivID + "-" + ID);
+        } else if (randomEmp < 0.85) {
+            return new Designer(DivID + "-" + ID);
+        } else {
+            return new Intern(DivID + "-" + ID);
+        }
     }
 }

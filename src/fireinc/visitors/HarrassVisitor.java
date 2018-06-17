@@ -5,6 +5,7 @@ import fireinc.workers.Caterer;
 import fireinc.workers.Coder;
 import fireinc.workers.promotions.CompanyCar;
 import fireinc.workers.Designer;
+import fireinc.workers.HRSpecialist;
 import fireinc.workers.Intern;
 import fireinc.workers.Manager;
 import fireinc.workers.promotions.OwnOffice;
@@ -93,6 +94,11 @@ public class HarrassVisitor implements Visitor<Void> {
 
     @Override
     public Void visit(Caterer c) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Void visit(HRSpecialist h) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

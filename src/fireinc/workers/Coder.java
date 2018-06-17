@@ -33,6 +33,7 @@ public class Coder<E> extends Employee {
     public void work() {
         double result = 0;
         result += random(); //mood factor
+        result += 0.5 - Math.abs(0.5 - attitude);
         result += skill;
         result += punctuality;
         result += workethics;
@@ -46,10 +47,10 @@ public class Coder<E> extends Employee {
         if (needsCoffee) {
             result -= 0.8;
         }
-        if (randomNormal() < 1 - skill / experience) {
+        if (randomNormal() < 1 - experience) {
             mistakes += 1;
         }
-        result = result / 5;
+        result = result / 5.5;
         currentWork += result;
     }
 }
