@@ -1,18 +1,21 @@
 package fireinc;
 
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 public class Printer {
+
     private int ID;
     private boolean occupied;
-    public Printer(int ID){
+    private Lock lock;
+    private Condition isFree, isOccupied;
+
+    public Printer(int ID) {
         this.ID = ID;
-    }
-    
-    public boolean getPrinterOcc() {
-        return isOccupied();
-    }
-    
-    public void setPrinterOcc(boolean use) {
-        setOccupied(use);
+        lock = new ReentrantLock();
+        isFree = lock.newCondition();
+        isOccupied = lock.newCondition();
     }
 
     /**
@@ -33,6 +36,12 @@ public class Printer {
      * @param occupied the occupied to set
      */
     public void setOccupied(boolean occupied) {
+
+        lock.lock();
+
         this.occupied = occupied;
+
+        lock.unlock();
+
     }
 }
