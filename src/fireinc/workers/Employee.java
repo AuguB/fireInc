@@ -184,8 +184,10 @@ public abstract class Employee<E> implements Runnable {
         this.needsCoffee = needsCoffee;
     }
 
+
     public double getPrecision() {
         return (skill + experience) / 2;
+
     }
 
     /**

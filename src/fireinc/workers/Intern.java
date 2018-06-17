@@ -10,7 +10,7 @@ public class Intern<E> extends Employee {
 
     @Override
     public void run() {
-         while (!fired) {
+        while (!fired) {
             days++;
             try {
                 work();
@@ -30,30 +30,31 @@ public class Intern<E> extends Employee {
     public void print(int amount) {
     }
 
-    
     public void work() {
         double result = 0;
-        result += skill 
-               += cleanliness
-               += social
-               += loyalty
-               += experience 
-               += kitchening
-               += looks
-               += 0.5-Math.abs(0.5-getAttitude());
-        
-        if(experience < 1)
+        result += skill;
+        result += cleanliness;
+        result += social;
+        result += loyalty;
+        result += experience;
+        result += kitchening;
+        result += looks;
+        result += 0.5 - Math.abs(0.5 - getAttitude());
+
+        if (experience < 1) {
             experience += 0.001;
-        if(skill < 1)
+        }
+        if (skill < 1) {
             skill += 0.001;
         
         result /= 7.5;
         
         if(result < 0.5)
             mistakes++;
-        
+        }
+
         decreaseFear();
-        
+
         currentWork += result;
     }
 }
