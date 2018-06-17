@@ -13,7 +13,7 @@ import fireinc.enums.Gender;
  * @author guus
  */
 public class FireInc {
-
+    
     /**
      * @param args the command line arguments
      */

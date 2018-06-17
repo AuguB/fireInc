@@ -199,6 +199,15 @@ public abstract class Employee<E> implements Runnable {
     public void setNeedsCoffee(boolean needsCoffee) {
         this.needsCoffee = needsCoffee;
     }
+    
+    public void setKitchening(double kitchening) {
+        this.kitchening = kitchening;
+    }
+    
+    public int getMistakes() {
+        return mistakes;
+    }
+            
 
     public double getPrecision() {
         return (skill + experience) / 2;

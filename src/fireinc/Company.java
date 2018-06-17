@@ -14,7 +14,7 @@ public class Company {
 
     private ArrayList<Division> divisions;
     private ArrayList<Owner> owners;
-    private ArrayList<Printer> printers;
+    public static ArrayList<Printer> printers;
     private final String NAME;
 
     public Company(String name) {
@@ -81,5 +81,5 @@ public class Company {
     public ArrayList<Printer> getPrinters() {
         return printers;
     }
-
+    
 }
