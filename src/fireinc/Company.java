@@ -69,7 +69,7 @@ public class Company {
     private void setPrinters() {
         this.printers = new ArrayList<>();
         for (int x = 0; x < NROFPRINTERS; x++) {
-
+            printers.add(new Printer(x + 1));
         }
     }
 
