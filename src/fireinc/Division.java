@@ -1,29 +1,26 @@
 package fireinc;
 
 
+import fireinc.enums.DivisionIdentifier;
 import fireinc.workers.Employee;
 import fireinc.workers.Manager;
 import java.util.ArrayList;
 
-public class Division {
+public class Division implements Runnable{
     
-    private String name;
+    private DivisionIdentifier div;
 
     private ArrayList<Employee> employees;
 
     private Employee manager;
 
     private double revenue;
+    
+    private boolean closed = false;
 
-    private int max;
-
-    private int min;
-
-    public Division(String name, int max, int min) {
+    public Division(DivisionIdentifier div) {
+        this.div = div;
         this.revenue = 0;
-        this.name = name;
-        this.max = max;
-        this.min = min;
     }
     
     public void setManager(Manager man){
@@ -32,5 +29,12 @@ public class Division {
     
     public double getRevenue() {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void run() {
+        while(!closed){
+            //do stuff
+        }
     }
 }

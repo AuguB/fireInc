@@ -20,4 +20,8 @@ public class Promotion<E> extends Employee {
         Thread thread = new Thread(employee);
         thread.start();
     }
+
+    public Employee getEmp() {
+        return employee;
+    }
 }
