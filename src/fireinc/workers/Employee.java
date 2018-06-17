@@ -24,6 +24,7 @@ public abstract class Employee<E> implements Runnable {
     protected double attitude;
     protected int days;
     protected int mistakes;
+    protected int attemptsToFire;
     protected boolean fired;
     protected boolean needsCoffee;
 
@@ -59,7 +60,7 @@ public abstract class Employee<E> implements Runnable {
     public void run() {
     }
 
-    public double results() {
+    public double getResults() {
         return workDone / days;
     }
 
@@ -180,11 +181,14 @@ public abstract class Employee<E> implements Runnable {
     public void setNeedsCoffee(boolean needsCoffee) {
         this.needsCoffee = needsCoffee;
     }
+    
+    public int getMistakes() {
+        return mistakes;
+    }
 
 
     public double getPrecision() {
         return (skill + experience) / 2;
-
     }
 
     public double getAttitude() {

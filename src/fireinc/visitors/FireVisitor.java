@@ -1,5 +1,6 @@
 package fireinc.visitors;
 
+import fireinc.Settings;
 import fireinc.workers.Accountant;
 import fireinc.workers.Caterer;
 import fireinc.workers.Coder;
@@ -18,7 +19,15 @@ public class FireVisitor implements Visitor<Void> {
 
     @Override
     public Void visit(Accountant a) {
-        fire(a);
+        boolean fired = false;
+        if (a.getResults() < Settings.MIN_RESULTS || Settings.FIN_TOLERABLE_MISTAKES <= a.getMistakes()) {
+           
+            
+        }
+
+        if (fired) {
+            fire(a);
+        }
         return null;
     }
 
@@ -54,7 +63,6 @@ public class FireVisitor implements Visitor<Void> {
 
     @Override
     public Void visit(OwnOffice o) {
-        fire(o);
         return null;
     }
 
@@ -87,8 +95,8 @@ public class FireVisitor implements Visitor<Void> {
         fire(h);
         return null;
     }
-    
-        private void fire(Employee e) {
+
+    private void fire(Employee e) {
         e.YouAreFired();
         System.out.println(this.getRandomOwner() + " has fired " + e.getName());
     }
