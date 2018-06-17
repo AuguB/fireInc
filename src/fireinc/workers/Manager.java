@@ -4,16 +4,20 @@ import static fireinc.Settings.*;
 import fireinc.Division;
 import fireinc.strategies.HiringStrategy;
 import fireinc.visitors.Visitor;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Manager<E> extends Employee {
 
     private HiringStrategy hiring;
     private Division div;
+    private Lock lock;
 
     public Manager(String ID, HiringStrategy hiring, Division div) {
         super(ID);
         this.hiring = hiring;
         this.div = div;
+        lock = new ReentrantLock();
     }
 
     public void run() {
@@ -36,18 +40,26 @@ public class Manager<E> extends Employee {
     }
 
     public Division getDiv() {
+        lock.lock();
+        try {
         return div;
+        } finally {
+            lock.unlock();
+        }
     }
 
     public void work() {
-
-
-        if (days%5 == 0) {
-            needsCoffee = true;
+        lock.lock();
+        try {
+            if (days%5 == 0) {
+                needsCoffee = true;
+            }
+            
+            produceResult();
+            hireNewPeople();
+        } finally {
+            lock.unlock();
         }
-
-        produceResult();
-        hireNewPeople();
     }
 
     
@@ -70,8 +82,6 @@ public class Manager<E> extends Employee {
             skill += SKILL_GAIN;
         }
         if (needsCoffee) {
-
-            result -= COFFEE_NEED;
 
             result -= COFFEE_NEED_PENALTY;
 

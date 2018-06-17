@@ -11,10 +11,12 @@ import static fireinc.Settings.*;
 
 import fireinc.visitors.Visitor;
 import java.util.Random;
+import java.util.concurrent.locks.Lock;
 
 public class Intern<E> extends Employee {
 
     private Random random;
+    private Lock lock;
 
     public Intern(String ID) {
         super(ID);
@@ -59,61 +61,62 @@ public class Intern<E> extends Employee {
     }
 
     public void work() {
-        if (days% 10 ==0) {
-            needsCoffee = true;
-        }
-        bringCoffee();
-
-        int nrOfCopies = random.nextInt(3) + 1;
-        print(nrOfCopies);
-
-        double result = 0;
-        result += randomNormal(); //mood factor
-        result += 0.5 - Math.abs(0.5 - getAttitude());
-        result += skill;
-        result += cleanliness;
-        result += social;
-        result += loyalty;
-        result += experience;
-        result += kitchening;
-        result += looks;
-        if (experience < 1) {
-            experience += EXP_GAIN;
-        }
-        if (skill < 1) {
-
-
-            skill += 0.001;
-
-            result /= 7.5;
-
-            if (result < 0.5) {
-                mistakes++;
+        lock.lock();
+        try {
+            if (days% 10 ==0) {
+                needsCoffee = true;
             }
-        }
-        bringCoffee();
-
-        skill += SKILL_GAIN;
-
-        if (needsCoffee) {
-            result -= COFFEE_NEED;
-        }
-        if (randomNormal() > getPrecision()) {
-            mistakes += 1;
-
+            bringCoffee();
+            
+            int nrOfCopies = random.nextInt(3) + 1;
+            print(nrOfCopies);
+            
+            double result = 0;
+            result += randomNormal(); //mood factor
+            result += 0.5 - Math.abs(0.5 - getAttitude());
+            result += skill;
+            result += cleanliness;
+            result += social;
+            result += loyalty;
+            result += experience;
+            result += kitchening;
+            result += looks;
+            if (experience < 1) {
+                experience += EXP_GAIN;
+            }
+            if (skill < 1) {
+                
+                
+                skill += 0.001;
+                
+                result /= 7.5;
+                
+                if (result < 0.5) {
+                    mistakes++;
+                }
+            }
+            bringCoffee();
+            
             skill += SKILL_GAIN;
 
+            if (randomNormal() > getPrecision()) {
+                mistakes += 1;
+                
+                skill += SKILL_GAIN;
+                
+            }
+            if (needsCoffee) {
+                result -= COFFEE_NEED_PENALTY;
+            }
+            if (randomNormal() > getPrecision()) {
+                mistakes += 1;
+            }
+            decreaseFear();
+            result = result / 8.5;
+            currentWork += result;
+        } finally {
+            lock.unlock();
         }
-        if (needsCoffee) {
-            result -= COFFEE_NEED_PENALTY;
-        }
-        if (randomNormal() > getPrecision()) {
-            mistakes += 1;
-        }
-        decreaseFear();
-        result = result / 8.5;
-        currentWork += result;
-
     }
 
     private void bringCoffee() {

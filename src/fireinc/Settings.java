@@ -40,7 +40,6 @@ public class Settings {
     
     public static final double MIN_RESULTS = 0.9;
 
-    public static final double COFFEE_NEED = 0.2;
 
     public static final double COFFEE_NEED_PENALTY = 0.2;
 
