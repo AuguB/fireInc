@@ -35,6 +35,10 @@ public class Manager<E> extends Employee {
         return (E) v.visit(this);
     }
 
+    public Division getDiv() {
+        return div;
+    }
+
     public void work() {
         double result = 0;
         result += skill;
@@ -51,15 +55,15 @@ public class Manager<E> extends Employee {
         if (skill < 1) {
             skill += 0.001;
         }
-
         result /= 6.5;
-
         if (result < 0.5) {
             mistakes++;
         }
-
         decreaseFear();
-
         currentWork += result;
+
+        if (div.getEmps().size() < div.getMax()) {
+            div.getEmps().add(hiring.hire(div.getNextEmpNR(), skill));
+        }
     }
 }

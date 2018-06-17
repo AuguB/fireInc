@@ -14,6 +14,7 @@ import fireinc.workers.promotions.OwnOffice;
 import fireinc.workers.promotions.Promotion;
 import fireinc.workers.promotions.Raise;
 import fireinc.workers.Tester;
+import static java.lang.Math.random;
 
 public class PromotionVisitor implements Visitor<Boolean> {
 
@@ -132,11 +133,11 @@ public class PromotionVisitor implements Visitor<Boolean> {
     @Override
     public Boolean visit(Manager a) {
         double points = 0;
-        double average = a.getAverageWork();
-        if (average > HARD_WORK) {
+        double average = a.getDiv().getAverageWork();
+        if (average > HARD_WORK * HARD_WORK) {
             points += 1;
         }
-        if (a.getMistakes() <= PRO_TOLERABLE_MISTAKES / 2) {
+        if (a.getMistakes() <= MAN_TOLERABLE_MISTAKES / 2) {
             points += 1;
         }
         if (a.getGender() == Gender.FEMALE) {
@@ -155,8 +156,8 @@ public class PromotionVisitor implements Visitor<Boolean> {
     }
 
     @Override
-    public Boolean visit(Intern i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Boolean visit(Intern a) {
+        return false;
     }
 
     @Override
@@ -165,13 +166,59 @@ public class PromotionVisitor implements Visitor<Boolean> {
     }
 
     @Override
-    public Boolean visit(Caterer c) {
-        return null;
+    public Boolean visit(Caterer a) {
+        double points = 0;
+        double average = a.getAverageWork();
+        if (average > HARD_WORK) {
+            points += 1;
+        }
+        if (a.getMistakes() <= CAT_TOLERABLE_MISTAKES / 2) {
+            points += 1;
+        }
+        if (a.getGender() == Gender.FEMALE) {
+            if (a.getLooks() > GOOD_LOOKS) {
+                points += 2;
+            }
+        } else {
+            if (a.getSocial() > VERY_SOCIAL) {
+                points += 1;
+            }
+        }
+        if (0.5 - Math.abs(a.getAttitude() - 0.5) > 0.1) {
+            points -= 1;
+        }
+        if (random() > a.getKitchening()) {
+            points -= 1;
+        }
+        return points >= 3;
     }
 
     @Override
-    public Boolean visit(HRSpecialist h) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Boolean visit(HRSpecialist a) {
+        double points = 0;
+        double average = a.getAverageWork();
+        if (average > HARD_WORK) {
+            points += 1;
+        }
+        if (a.getMistakes() <= HR_TOLERABLE_MISTAKES / 2) {
+            points += 1;
+        }
+        if (a.getGender() == Gender.FEMALE) {
+            if (a.getLooks() > GOOD_LOOKS) {
+                points += 2;
+            }
+        } else {
+            if (a.getSocial() > VERY_SOCIAL) {
+                points += 1;
+            }
+        }
+        if (0.5 - Math.abs(a.getAttitude() - 0.5) > 0.1) {
+            points -= 1;
+        }
+        if (random() > a.getSocial()) {
+            points -= 1;
+        }
+        return points >= 3;
     }
 
 }

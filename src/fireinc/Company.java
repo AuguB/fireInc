@@ -9,19 +9,33 @@ import fireinc.strategies.HRHireStrategy;
 import fireinc.strategies.ProductionHireStrategy;
 import fireinc.workers.Manager;
 import java.util.ArrayList;
+import java.util.concurrent.locks.Lock;
 
 public class Company {
 
     private ArrayList<Division> divisions;
     private ArrayList<Owner> owners;
+    private Lock lock;
     public static ArrayList<Printer> printers;
     private final String NAME;
+    private static double revenue;
 
     public Company(String name) {
         setDivisions();
         setOwners();
         setPrinters();
         this.NAME = name;
+        this.revenue = 0;
+    }
+
+    public void start() {
+        for (Division d : divisions) {
+            Thread thread = new Thread(d);
+            thread.start();
+        }
+        while(true){
+            
+        }
     }
 
     private void setDivisions() {
@@ -81,5 +95,13 @@ public class Company {
     public ArrayList<Printer> getPrinters() {
         return printers;
     }
-    
+
+    public void addRevenue(double rev) {
+        lock.lock();
+        try {
+            revenue += rev;
+        } finally {
+            lock.unlock();
+        }
+    }
 }
