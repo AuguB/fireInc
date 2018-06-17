@@ -3,6 +3,8 @@ package fireinc.workers;
 import fireinc.Company;
 import fireinc.visitors.Visitor;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Intern<E> extends Employee {
 
@@ -35,10 +37,17 @@ public class Intern<E> extends Employee {
         int gotPrinters = amount;
         for (int i = 0; i < Company.printers.size(); i++) {
             while (gotPrinters > 0) {
-                if (!Company.printers.get(i).getPrinterOcc()) {
-                    Company.printers.get(i).setPrinterOcc(true);
+                if (!Company.printers.get(i).isOccupied()) {
+                    Company.printers.get(i).setOccupied(true);
                     gotPrinters--;
+                    try {
+                        Thread.sleep(50); // time it takes to print
+                        Company.printers.get(i).setOccupied(false);
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
                 }
+                
             }
         }
     }

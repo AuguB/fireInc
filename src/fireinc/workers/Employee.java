@@ -205,6 +205,8 @@ public abstract class Employee<E> implements Runnable {
     public void setKitchening(double kitchening) {
         this.kitchening = kitchening;
     }
+   
+            
 
     public double getPrecision() {
         return (skill + experience) / 2;
