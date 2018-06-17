@@ -24,7 +24,7 @@ public abstract class Employee<E> implements Runnable {
     protected double kitchening;
     protected double workDone;
     protected double currentWork;
-    protected double attitude;
+    private double attitude;
     protected int days;
     protected int mistakes;
     protected boolean fired;
@@ -61,8 +61,8 @@ public abstract class Employee<E> implements Runnable {
     }
 
     public void decreaseFear() {
-        if (attitude > 0) {
-            attitude -= 0.0001;
+        if (getAttitude() > 0) {
+            setAttitude(getAttitude() - 0.0001);
         }
     }
 
@@ -176,5 +176,19 @@ public abstract class Employee<E> implements Runnable {
 
     public void setNeedsCoffee(boolean needsCoffee) {
         this.needsCoffee = needsCoffee;
+    }
+
+    /**
+     * @return the attitude
+     */
+    public double getAttitude() {
+        return attitude;
+    }
+
+    /**
+     * @param attitude the attitude to set
+     */
+    public void setAttitude(double attitude) {
+        this.attitude = attitude;
     }
 }

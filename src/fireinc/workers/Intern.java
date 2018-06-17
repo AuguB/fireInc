@@ -13,9 +13,9 @@ public class Intern<E> extends Employee {
             days++;
             try {
                 work();
-                Thread.sleep(300); //lunchbreak
+                Thread.sleep(200); //lunchbreak
                 work();
-                Thread.sleep(2000); //sleep
+                Thread.sleep(1000); //sleep
             } catch (InterruptedException ex) {
             }
         }
@@ -39,18 +39,20 @@ public class Intern<E> extends Employee {
                += experience 
                += kitchening
                += looks
-               += 0.5-Math.abs(0.5-attitude);
+               += 0.5-Math.abs(0.5-getAttitude());
         
         if(experience < 1)
-            experience += 0.01;
+            experience += 0.001;
         if(skill < 1)
-            skill += 0.01;
-        if(result < 0.6)
+            skill += 0.001;
+        
+        result /= 8.5;
+        
+        if(result < 0.5)
             mistakes++;
         
-        result/=8.5;
+        decreaseFear();
         
-        
-        
+        currentWork += result;
     }
 }
