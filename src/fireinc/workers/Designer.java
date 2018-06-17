@@ -47,7 +47,7 @@ public class Designer<E> extends Employee {
             skill += SKILL_GAIN;
         }
         if (needsCoffee) {
-            result -= COFFEE_NEED;
+            result -= COFFEE_NEED_PENALTY;
         }
         if (randomNormal() > getPrecision()) {
             mistakes += 1;

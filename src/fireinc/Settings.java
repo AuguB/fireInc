@@ -34,7 +34,7 @@ public class Settings {
     public static final double SKILL_GAIN = 0.0005;
     
     public static final double MIN_RESULTS = 0.9;
-    public static final double COFFEE_NEED = 0.2;
+    public static final double COFFEE_NEED_PENALTY = 0.2;
     
     public static final double HARD_WORK = 1.2;
     public static final double GOOD_LOOKS = 0.7;
@@ -48,4 +48,13 @@ public class Settings {
     public static final int LEGENDARY_WORKER = 7200; // 20 years
     
     public static final double SCORE_BONUS = 0.5;
+    
+    public static final double BASE_ACCOUNTANT_SALARY = 3000;
+    public static final double BASE_CATERER_SALARY = 2000;
+    public static final double BASE_CODER_SALARY = 3500;
+    public static final double BASE_DESIGNER_SALARY = 2500;
+    public static final double BASE_HR_SALARY = 2500;
+    public static final double BASE_INTER_SALARY = 400;
+    public static final double BASE_MANAGER_SALARY = 5000;
+    public static final double BASE_TESTER_SALARY = 2500;
 }
