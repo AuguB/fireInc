@@ -75,19 +75,21 @@ public class FireVisitor implements Visitor<Void> {
         fire(p);
         return null;
     }
-    
-    private void fire(Employee e) {
-        e.YouAreFired();
-        System.out.println(this.getRandomOwner() + " has fired " + e.getName());
-    }
 
     @Override
     public Void visit(Caterer c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        fire(c);
+        return null;
     }
 
     @Override
     public Void visit(HRSpecialist h) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        fire(h);
+        return null;
+    }
+    
+        private void fire(Employee e) {
+        e.YouAreFired();
+        System.out.println(this.getRandomOwner() + " has fired " + e.getName());
     }
 }

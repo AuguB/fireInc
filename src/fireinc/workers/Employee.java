@@ -1,9 +1,6 @@
 package fireinc.workers;
 
-import fireinc.Company;
 import static fireinc.NameGenerator.NameGenerator.*;
-import fireinc.NameGenerator.Name;
-import fireinc.NameGenerator.NameGenerator;
 import fireinc.enums.Gender;
 import fireinc.visitors.Visitor;
 import static java.lang.Math.random;
@@ -190,16 +187,10 @@ public abstract class Employee<E> implements Runnable {
 
     }
 
-    /**
-     * @return the attitude
-     */
     public double getAttitude() {
         return attitude;
     }
 
-    /**
-     * @param attitude the attitude to set
-     */
     public void setAttitude(double attitude) {
         this.attitude = attitude;
     }
