@@ -71,4 +71,10 @@ public class Division implements Runnable {
         nrOfHiredEmps++;
         return nrOfHiredEmps;
     }
+    
+    public double getGrowth() {
+        
+    }
+    
+    
 }
