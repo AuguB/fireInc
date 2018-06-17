@@ -1,13 +1,14 @@
 package fireinc.workers.promotions;
 
 import fireinc.visitors.Visitor;
+import fireinc.workers.Employee;
 
 public class Raise<E> extends Promotion {
 
     private double value;
 
-    public Raise(String ID) {
-        super( ID);
+    public Raise(String ID, Employee emp) {
+        super( ID, emp);
     }
     
     @Override

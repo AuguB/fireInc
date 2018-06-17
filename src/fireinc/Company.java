@@ -11,6 +11,7 @@ import fireinc.visitors.FireVisitor;
 import fireinc.visitors.PromotionVisitor;
 import fireinc.workers.Employee;
 import fireinc.workers.Manager;
+import fireinc.workers.promotions.Raise;
 import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
 
@@ -45,7 +46,7 @@ public class Company {
                     for (Employee emp : d.getEmps()) {
                         emp.accept(firing);
                     }
-                }else if (d.growth()>1.2){
+                } else if (d.growth() > 1.2) {
                     promotionRound(d);
                 }
             }
@@ -121,9 +122,19 @@ public class Company {
 
     private void promotionRound(Division d) {
         PromotionVisitor prom = new PromotionVisitor();
-        for(Employee emp: d.getEmps()){
-            
+        for (Employee emp : d.getEmps()) {
+            if ((Boolean) emp.accept(prom)) {
+                if (emp.hasCar()) {
+                    if (emp.hasOffice()) {
+                        d.getEmps().remove(emp);
+                        emp = new Raise(emp.getID(), emp);
+                        d.getEmps().add(emp);
+                        Thread thread = new Thread(emp);
+                        thread.start();
+                    }
+                }
+            }
         }
-        
+
     }
 }

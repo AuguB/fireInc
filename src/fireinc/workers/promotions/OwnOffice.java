@@ -1,6 +1,7 @@
 package fireinc.workers.promotions;
 
 import fireinc.visitors.Visitor;
+import fireinc.workers.Employee;
 
 public class OwnOffice<E> extends Promotion {
 
@@ -10,8 +11,8 @@ public class OwnOffice<E> extends Promotion {
 
     private boolean airco;
 
-    public OwnOffice(String ID) {
-        super( ID);
+    public OwnOffice(String ID, Employee emp) {
+        super( ID, emp);
     }
     
     @Override

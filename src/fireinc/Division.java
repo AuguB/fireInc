@@ -105,4 +105,9 @@ public class Division implements Runnable {
     public Manager getMan(){
         return manager;
     }
+    
+    @Override
+    public String toString(){
+        return divID.getName();
+    }
 }

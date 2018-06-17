@@ -7,7 +7,7 @@ public class Promotion<E> extends Employee {
 
     protected Employee employee;
 
-    public Promotion(String ID) {
+    public Promotion(String ID, Employee emp) {
         super(ID);
     }
 

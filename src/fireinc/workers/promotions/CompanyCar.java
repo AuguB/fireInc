@@ -1,13 +1,14 @@
 package fireinc.workers.promotions;
 
 import fireinc.visitors.Visitor;
+import fireinc.workers.Employee;
 
 public class CompanyCar<E> extends Promotion {
 
     private double horsePower;
 
-    public CompanyCar(String ID) {
-        super(ID);
+    public CompanyCar(String ID, Employee emp) {
+        super(ID, emp);
     }
 
     @Override

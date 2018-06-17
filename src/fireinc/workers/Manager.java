@@ -73,7 +73,10 @@ public class Manager<E> extends Employee {
 
     private void hireNewPeople() {
         if (div.getEmps().size() < div.getMax()) {
-            div.getEmps().add(hiring.hire(div.getNextEmpNR(), skill));
+            Employee newEmp = hiring.hire(div.getNextEmpNR(), skill);
+            div.getEmps().add(newEmp);
+            System.out.println(div + " hired: " + newEmp);
+
         }
     }
 }
