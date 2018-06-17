@@ -1,7 +1,14 @@
 package fireinc.workers;
 
 import fireinc.Company;
+
+
+import fireinc.Division;
+
 import static fireinc.Settings.*;
+
+import static fireinc.Settings.*;
+
 import fireinc.visitors.Visitor;
 import java.util.Random;
 
@@ -32,7 +39,7 @@ public class Intern<E> extends Employee {
         return (E) v.visit(this);
     }
 
-    public void print(int amount) {
+    private void print(int amount) {
         int gotPrinters = amount;
         for (int i = 0; i < Company.printers.size(); i++) {
             while (gotPrinters > 0) {
@@ -52,6 +59,10 @@ public class Intern<E> extends Employee {
     }
 
     public void work() {
+        if (days% 10 ==0) {
+            needsCoffee = true;
+        }
+        bringCoffee();
 
         int nrOfCopies = random.nextInt(3) + 1;
         print(nrOfCopies);
@@ -70,7 +81,28 @@ public class Intern<E> extends Employee {
             experience += EXP_GAIN;
         }
         if (skill < 1) {
+
+
+            skill += 0.001;
+
+            result /= 7.5;
+
+            if (result < 0.5) {
+                mistakes++;
+            }
+        }
+        bringCoffee();
+
+        skill += SKILL_GAIN;
+
+        if (needsCoffee) {
+            result -= COFFEE_NEED;
+        }
+        if (randomNormal() > getPrecision()) {
+            mistakes += 1;
+
             skill += SKILL_GAIN;
+
         }
         if (needsCoffee) {
             result -= COFFEE_NEED_PENALTY;
@@ -81,5 +113,17 @@ public class Intern<E> extends Employee {
         decreaseFear();
         result = result / 8.5;
         currentWork += result;
+
     }
+
+    private void bringCoffee() {
+        for (Division div : Company.divisions) {
+            for (Employee emp : div.getEmps()) {
+                if (emp.needsCoffee) {
+                    emp.needsCoffee = false;
+                }
+            }
+        }
+    }
+
 }

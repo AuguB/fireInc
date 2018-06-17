@@ -33,6 +33,8 @@ public class Accountant<E> extends Employee {
     
 
     public void work() {
+        if(days%10 ==0)
+            needsCoffee = true;
         double result = 0;
         result += randomNormal(); //mood factor
         result += 0.5 - Math.abs(0.5 - attitude);
@@ -47,7 +49,11 @@ public class Accountant<E> extends Employee {
             skill += SKILL_GAIN;
         }
         if (needsCoffee) {
+
+            result -= COFFEE_NEED;
+
             result -= COFFEE_NEED_PENALTY;
+
         }
         if (randomNormal() > getPrecision()) {
             mistakes += 1;

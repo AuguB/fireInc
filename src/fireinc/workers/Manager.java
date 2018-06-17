@@ -40,11 +40,20 @@ public class Manager<E> extends Employee {
     }
 
     public void work() {
+
+
+        if (days%5 == 0) {
+            needsCoffee = true;
+        }
+
         produceResult();
         hireNewPeople();
     }
 
+    
+
     private void produceResult() {
+        hireNewPeople();
         double result = 0;
         result += 0.5 - Math.abs(0.5 - getAttitude());
         result += skill;
@@ -61,7 +70,11 @@ public class Manager<E> extends Employee {
             skill += SKILL_GAIN;
         }
         if (needsCoffee) {
+
+            result -= COFFEE_NEED;
+
             result -= COFFEE_NEED_PENALTY;
+
         }
         if (randomNormal() > getPrecision()) {
             mistakes++;

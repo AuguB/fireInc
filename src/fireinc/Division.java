@@ -89,6 +89,7 @@ public class Division implements Runnable {
         return nrOfHiredEmps;
     }
 
+
     private void addRevenue(double revenueFromEmployees) {
         lock.lock();
         try {

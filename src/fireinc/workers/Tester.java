@@ -32,6 +32,10 @@ public class Tester<E> extends Employee {
     public void work() {
         double result = 0;
         result += 0.5 - Math.abs(0.5 - attitude);
+        if (days % 10 ==0) {
+            needsCoffee = true;
+        }
+        
         result += skill;
         result += punctuality;
         result += cleanliness;
@@ -44,7 +48,11 @@ public class Tester<E> extends Employee {
             skill += SKILL_GAIN;
         }
         if (needsCoffee) {
+
+            result -= COFFEE_NEED;
+
             result -= COFFEE_NEED_PENALTY;
+
         }
         if (randomNormal() > getPrecision()) {
             mistakes++;
