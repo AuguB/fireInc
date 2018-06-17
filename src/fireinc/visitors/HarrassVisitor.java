@@ -1,6 +1,7 @@
 package fireinc.visitors;
 
 import fireinc.workers.Accountant;
+import fireinc.workers.Caterer;
 import fireinc.workers.Coder;
 import fireinc.workers.promotions.CompanyCar;
 import fireinc.workers.Designer;
@@ -82,6 +83,11 @@ public class HarrassVisitor implements Visitor<Void> {
         return ((random.nextDouble() * (0.12 - 0.01) + 0.01) 
                 + (random.nextDouble() * (0.12 - 0.01) + 0.01)) 
                 /2;
+    }
+
+    @Override
+    public Void visit(Caterer c) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
