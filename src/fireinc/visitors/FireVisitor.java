@@ -1,6 +1,7 @@
 package fireinc.visitors;
 
 import static fireinc.Settings.*;
+import fireinc.enums.DivisionIdentifier;
 import static fireinc.enums.Gender.*;
 import fireinc.workers.Accountant;
 import fireinc.workers.Caterer;
@@ -167,6 +168,6 @@ public class FireVisitor implements Visitor<Void> {
 
     private void fire(Employee e) {
         e.YouAreFired();
-        System.out.println(getRandomOwner() + " has fired " + e.getName());
+        System.out.println(getRandomOwner().toString() + " has fired " + e.getName() + " from "+DivisionIdentifier.valueOf(e.getID().substring(0,2)).getName());
     }
 }

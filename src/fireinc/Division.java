@@ -31,7 +31,7 @@ public class Division implements Runnable {
         lock = new ReentrantLock();
         prevRev = 0;
         revenue = 0;
-        this.nrOfManagers = 1;
+        this.nrOfManagers = 2;
         this.divID = div;
         this.revenue = 0;
         this.nrOfHiredEmps = 0;
@@ -43,7 +43,7 @@ public class Division implements Runnable {
         newThread.start();
         while (!closed) {
             if (manager.isFired()) {
-                String ID = (nrOfManagers++ + divID.getCode());
+                String ID = (nrOfManagers++ + "-" + divID.getCode());
                 HiringStrategy hiring = divID.getHiring();
                 manager = new Manager(ID, hiring, this);
                 System.out.println(divID.getCode() + " hired a new manager: " + manager);
@@ -134,6 +134,16 @@ public class Division implements Runnable {
         lock.lock();
         try {
             revenue += revenueFromEmployees;
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public double getRevenue() {
+        lock.lock();
+        try {
+            return revenue;
+
         } finally {
             lock.unlock();
         }

@@ -18,9 +18,9 @@ import fireinc.strategies.ProductionHireStrategy;
  */
 public enum DivisionIdentifier {
 
-    FINANCE(FINMIN, FINMAX, "FIN", "Finance", new FinanceHireStrategy()),
-    PRODUCTION(PRODMIN, PRODMAX, "PROD", "Production", new ProductionHireStrategy()),
-    CATERING(CATMIN, CATMAX, "CAT", "Catering", new CaterHireStrategy()),
+    FI(FINMIN, FINMAX, "FIN", "Finance", new FinanceHireStrategy()),
+    PR(PRODMIN, PRODMAX, "PROD", "Production", new ProductionHireStrategy()),
+    CA(CATMIN, CATMAX, "CAT", "Catering", new CaterHireStrategy()),
     HR(HRMIN, HRMAX, "HR", "Human Resources", new HRHireStrategy());
 
     private final int minimum;

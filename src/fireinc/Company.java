@@ -61,9 +61,11 @@ public class Company {
                 lock.unlock();
             }
             if (cycles % COMPANY_CYCLES == 0) {
+                revenue = 0;
                 for (Division d : divisions) {
                     d.addRevenue(d.getRevenueFromEmployees());
                     double divGrowth = d.growth();
+                    revenue+=d.getRevenue();
                     if (divGrowth < 0.8) {
                         String firedSucker = d.getMan().getDiv().getName()
                                 + " did very poorly this quater, fucking manager "
@@ -73,8 +75,8 @@ public class Company {
                         } else {
                             firedSucker += "his ";
                         }
-                        System.out.println(firedSucker+"ass fired by "
-                                + getRandomOwner() + "!");
+                        System.out.println(firedSucker + "ass fired by "
+                                + getRandomOwner().toString() + "!");
                         d.getMan().YouAreFired();
                     } else if (divGrowth < 1) {
 //                    } else if (true) {
@@ -84,6 +86,7 @@ public class Company {
                         promotionRound(d);
                     }
                 }
+                System.out.println("Total revenue so far: "+revenue);
                 try {
                     Thread.sleep(5000);
                 } catch (InterruptedException ex) {
@@ -120,7 +123,7 @@ public class Company {
     }
 
     private Division productionDivision() {
-        Division div = new Division(DivisionIdentifier.PRODUCTION);
+        Division div = new Division(DivisionIdentifier.PR);
         System.out.println("Production division established");
         Manager man = new Manager("PROM1", new ProductionHireStrategy(), div);
         div.setManager(man);
@@ -129,7 +132,7 @@ public class Company {
     }
 
     private Division financeDivision() {
-        Division div = new Division(DivisionIdentifier.FINANCE);
+        Division div = new Division(DivisionIdentifier.FI);
         System.out.println("Finance division established");
         Manager man = new Manager("FINM1", new FinanceHireStrategy(), div);
         div.setManager(man);
@@ -138,7 +141,7 @@ public class Company {
     }
 
     private Division caterDivision() {
-        Division div = new Division(DivisionIdentifier.CATERING);
+        Division div = new Division(DivisionIdentifier.CA);
         System.out.println("Catering division established");
         Manager man = new Manager("CATM1", new CaterHireStrategy(), div);
         div.setManager(man);
@@ -192,23 +195,15 @@ public class Company {
             PromotionVisitor prom = new PromotionVisitor();
             for (Employee emp : d.getEmps()) {
                 if ((Boolean) emp.accept(prom)) {
+                    emp.YouAreFired();
+                    d.getEmps().remove(emp);
+                    String congratz = emp.getName() + " from " + DivisionIdentifier.valueOf(emp.getID().substring(0,2)).getName() + " got ";
                     if (emp.hasCar()) {
                         if (emp.hasOffice()) {
-                            emp.YouAreFired();
-                            d.getEmps().remove(emp);
                             emp = new Raise(emp.getID(), emp);
-                            d.getEmps().add(emp);
-                            Thread thread = new Thread(emp);
-                            thread.start();
-                            System.out.println(emp.getName() + " got a raise!");
+                            System.out.println(congratz + " a raise!");
                         } else {
-                            emp.YouAreFired();
-                            d.getEmps().remove(emp);
                             emp = new OwnOffice(emp.getID(), emp);
-                            d.getEmps().add(emp);
-                            Thread thread = new Thread(emp);
-                            thread.start();
-                            String congratz = emp.getName() + " got ";
                             if (emp.getGender() == Gender.FEMALE) {
                                 congratz += "her ";
                             } else {
@@ -217,20 +212,12 @@ public class Company {
                             System.out.println(congratz + "own office!");
                         }
                     } else {
-                        emp.YouAreFired();
-                        d.getEmps().remove(emp);
                         emp = new CompanyCar(emp.getID(), emp);
-                        d.getEmps().add(emp);
-                        Thread thread = new Thread(emp);
-                        thread.start();
-                        String congratz = emp.getName() + " got ";
-                        if (emp.getGender() == Gender.FEMALE) {
-                            congratz += "her ";
-                        } else {
-                            congratz += "his ";
-                        }
-                        System.out.println(congratz + "own car!");
+                        System.out.println(congratz + "a company car!");
                     }
+                    d.getEmps().add(emp);
+                    Thread thread = new Thread(emp);
+                    thread.start();
                 }
             }
         } catch (ConcurrentModificationException e) {
