@@ -18,21 +18,23 @@ import fireinc.strategies.ProductionHireStrategy;
  */
 public enum DivisionIdentifier {
 
-    FINANCE(FINMIN, FINMAX, "FIN", new FinanceHireStrategy()),
-    PRODUCTION(PRODMIN, PRODMAX, "PROD", new ProductionHireStrategy()),
-    CATERING(CATMIN, CATMAX, "CAT", new CaterHireStrategy()),
-    HR(HRMIN, HRMAX, "HR", new HRHireStrategy());
+    FI(FINMIN, FINMAX, "FIN", "Finance", new FinanceHireStrategy()),
+    PR(PRODMIN, PRODMAX, "PROD", "Production", new ProductionHireStrategy()),
+    CA(CATMIN, CATMAX, "CAT", "Catering", new CaterHireStrategy()),
+    HR(HRMIN, HRMAX, "HR", "Human Resources", new HRHireStrategy());
 
     private final int minimum;
     private final int maximum;
-    private final String name;
+    private final String code;
     private final HiringStrategy hiring;
+    private final String name;
 
-    DivisionIdentifier(int min, int max, String name, HiringStrategy hiring) {
+    DivisionIdentifier(int min, int max, String code, String name, HiringStrategy hiring) {
         this.minimum = min;
         this.maximum = max;
-        this.name = name;
+        this.code = code;
         this.hiring = hiring;
+        this.name = name;
     }
 
     public int getMinimum() {
@@ -43,11 +45,15 @@ public enum DivisionIdentifier {
         return maximum;
     }
 
-    public String getName() {
-        return name;
+    public String getCode() {
+        return code;
+    }
+
+    public HiringStrategy getHiring() {
+        return hiring;
     }
     
-    public HiringStrategy getHiring(){
-        return hiring;
+    public String getName(){
+        return name;
     }
 }

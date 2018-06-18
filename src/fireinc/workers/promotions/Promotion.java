@@ -1,6 +1,7 @@
 package fireinc.workers.promotions;
 
 import fireinc.visitors.Visitor;
+import fireinc.workers.Accountant;
 import fireinc.workers.Employee;
 
 public class Promotion<E> extends Employee {
@@ -9,6 +10,7 @@ public class Promotion<E> extends Employee {
 
     public Promotion(String ID, Employee emp) {
         super(ID);
+        this.employee = emp;
     }
 
     public E accept(Visitor v) {

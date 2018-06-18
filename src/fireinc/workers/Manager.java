@@ -96,7 +96,7 @@ public class Manager<E> extends Employee {
         if (div.getEmps().size() < div.getMax()) {
             Employee newEmp = hiring.hire(div.getNextEmpNR(), getSkill());
             div.getEmps().add(newEmp);
-            System.out.println(div + " hired: " + newEmp);
+            System.out.println(div.getName() + " hired: " + newEmp);
             Thread thread = new Thread(newEmp);
             thread.start();
         }
