@@ -1,8 +1,6 @@
 package fireinc.strategies;
 
-import fireinc.enums.Gender;
 import static fireinc.Settings.*;
-import fireinc.workers.Caterer;
 import fireinc.workers.Employee;
 import fireinc.workers.HRSpecialist;
 import fireinc.workers.Intern;
